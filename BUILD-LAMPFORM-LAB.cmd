@@ -11,6 +11,8 @@ call npm ci
 if errorlevel 1 goto fail
 ".venv\Scripts\python.exe" analysis\build_design_space.py
 if errorlevel 1 goto fail
+".venv\Scripts\python.exe" analysis\build_physical.py
+if errorlevel 1 goto fail
 call npm run build
 if errorlevel 1 goto fail
 call npm test

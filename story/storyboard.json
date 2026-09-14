@@ -1,0 +1,339 @@
+[
+  {
+    "scene": 1,
+    "title": "The object",
+    "message": "The lamp starts as a flat FDM lattice and is thermoformed into a doubly curved shell.",
+    "voiceover_note": "Apresentar a peça original real. A falha na termoformação é o problema relatado pelo autor; ainda não há registro experimental no app.",
+    "duration_hint": 15,
+    "phases": [
+      "Flat STL",
+      "Mold ghost"
+    ],
+    "frame": "01_object.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "isometric",
+      "position": [
+        118,
+        -154,
+        158
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "scene": 2,
+    "title": "The problem",
+    "message": "A flat lattice cannot conform to this surface without stretching, rotating or feeding material.",
+    "voiceover_note": "Mostrar a incompatibilidade geométrica; não chamar as cores de tensão PETG.",
+    "duration_hint": 15,
+    "phases": [
+      "Flat",
+      "Formed",
+      "High demand"
+    ],
+    "frame": "02_problem.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "isometric",
+      "position": [
+        118,
+        -154,
+        158
+      ],
+      "target": [
+        0,
+        0,
+        18
+      ]
+    }
+  },
+  {
+    "scene": 3,
+    "title": "The mold",
+    "message": "The real mold geometry becomes the target surface, instead of an assumed hemisphere.",
+    "voiceover_note": "As duas ferramentas vêm dos STL originais. Posições de apresentação não simulam contato entre ferramentas.",
+    "duration_hint": 15,
+    "phases": [
+      "Mold / Push",
+      "Dimensions"
+    ],
+    "frame": "03_mold.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "isometric",
+      "position": [
+        118,
+        -154,
+        158
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "scene": 4,
+    "title": "Digital reconstruction",
+    "message": "Real STL → detected cells → nodes → ligaments.",
+    "voiceover_note": "Explicar a correspondência entre 65 aberturas detectadas e a rede equivalente.",
+    "duration_hint": 15,
+    "phases": [
+      "Real STL",
+      "Detected cells",
+      "Nodes",
+      "Ligaments"
+    ],
+    "frame": "04_reconstruction.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "top",
+      "position": [
+        0,
+        -0.1,
+        245
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "scene": 5,
+    "title": "Forming",
+    "message": "The solver searches for how the network can move in-plane while conforming to the mold.",
+    "voiceover_note": "Cada etapa vem de uma solução real de continuação do solver.",
+    "duration_hint": 15,
+    "phases": [
+      "0%",
+      "25%",
+      "50%",
+      "75%",
+      "100%"
+    ],
+    "frame": "05_forming.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "isometric",
+      "position": [
+        118,
+        -154,
+        158
+      ],
+      "target": [
+        0,
+        0,
+        18
+      ]
+    }
+  },
+  {
+    "scene": 6,
+    "title": "Where does it want to deform?",
+    "message": "The important question is not only how much deformation is required, but in which direction.",
+    "voiceover_note": "Distinguir magnitudes e direções. Direções quase isotrópicas não são identificáveis.",
+    "duration_hint": 22,
+    "phases": [
+      "λ1",
+      "λ2",
+      "Principal direction"
+    ],
+    "frame": "06_principal_stretch.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "top",
+      "position": [
+        0,
+        -0.1,
+        245
+      ],
+      "target": [
+        0,
+        0,
+        18
+      ]
+    }
+  },
+  {
+    "scene": 7,
+    "title": "The mechanisms",
+    "message": "Different regions may require different mechanisms.",
+    "voiceover_note": "As categorias são hipóteses heurísticas, não mecanismos fisicamente provados.",
+    "duration_hint": 15,
+    "phases": [
+      "MATERIAL RESERVE",
+      "DIRECTIONAL COMPLIANCE",
+      "BOUNDARY FEED",
+      "AREA EXPANSION"
+    ],
+    "frame": "07_mechanisms.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "top",
+      "position": [
+        0,
+        -0.1,
+        245
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "scene": 8,
+    "title": "Original design",
+    "message": "Locate critical regions before changing the geometry.",
+    "voiceover_note": "P95, máximo e contagem crítica vêm do mesmo modelo de referência.",
+    "duration_hint": 15,
+    "phases": [
+      "Flat honeycomb",
+      "Risk map"
+    ],
+    "frame": "08_original_risk.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "top",
+      "position": [
+        0,
+        -0.1,
+        245
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "scene": 9,
+    "title": "Generative response",
+    "message": "Test geometric reserve aligned with the estimated geometric mechanism.",
+    "voiceover_note": "Mostrar exatamente onde há reserva e conectores curvos. Um conceito ondulado bidirecional não prova auxeticidade.",
+    "duration_hint": 15,
+    "phases": [
+      "Overlay",
+      "Hole / ligament",
+      "Directional reserve",
+      "Boundary only"
+    ],
+    "frame": "09_candidate.png",
+    "part": "submerged",
+    "candidate": "directional",
+    "camera": {
+      "preset": "top",
+      "position": [
+        0,
+        -0.1,
+        245
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "scene": 10,
+    "title": "Does it improve?",
+    "message": "Improvement can move the problem: keep the same camera and color scale.",
+    "voiceover_note": "Comparar melhora e piora. Sub-Merged permanece o problema mais difícil.",
+    "duration_hint": 15,
+    "phases": [
+      "Original | Candidate",
+      "Delta map"
+    ],
+    "frame": "10_delta.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "top",
+      "position": [
+        0,
+        -0.1,
+        245
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "scene": 11,
+    "title": "Simulation is not validation",
+    "message": "A better simulation score does not prove a better physical part.",
+    "voiceover_note": "Explicar por que obter um STL não encerra o trabalho.",
+    "duration_hint": 15,
+    "phases": [
+      "Prediction → Print → Thermoform → Measure"
+    ],
+    "frame": "11_validation.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "isometric",
+      "position": [
+        118,
+        -154,
+        158
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "scene": 12,
+    "title": "Physical validation loop",
+    "message": "MODEL → TEST → CALIBRATE → PREDICT",
+    "voiceover_note": "Imprimir A/B/C/D, medir, calibrar no Original e validar em Candidate separado. Não existem medidas físicas ainda.",
+    "duration_hint": 15,
+    "phases": [
+      "A Original",
+      "B Reserve",
+      "C Boundary",
+      "D Hybrid",
+      "Predicted vs measured"
+    ],
+    "frame": "12_loop.png",
+    "part": "submerged",
+    "candidate": "reserve_search_3",
+    "camera": {
+      "preset": "top",
+      "position": [
+        0,
+        -0.1,
+        245
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  }
+]

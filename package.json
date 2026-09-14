@@ -1,16 +1,19 @@
 {
   "name": "lampform-lab",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
-  "description": "Demonstração pública da pesquisa LampForm Lab",
+  "description": "DemonstraÃ§Ã£o pÃºblica da pesquisa LampForm Lab",
   "type": "module",
   "scripts": {
-    "build": "esbuild web/workbench.js --bundle --format=esm --minify --outfile=dist/app.js --tsconfig=tsconfig.json",
+    "build": "esbuild web/physical.js web/story.js --bundle --format=esm --minify --outdir=dist --tsconfig=tsconfig.json",
     "start": "node scripts/serve.mjs",
     "test": "node scripts/run-tests.mjs",
-    "analysis": "python analysis/build_design_space.py"
+    "analysis": "python analysis/build_design_space.py",
+    "analysis:physical": "python analysis/build_physical.py",
+    "capture-story": "node scripts/capture-story.mjs"
   },
   "dependencies": {
+    "fflate": "0.8.3",
     "three": "0.186.0"
   },
   "devDependencies": {

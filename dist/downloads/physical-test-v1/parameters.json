@@ -1,0 +1,127 @@
+{
+  "version": "0.6.0",
+  "solver_defaults": {
+    "boundary_anchor": 2.0,
+    "interior_anchor": 0.0005,
+    "bending_weight": 0.01,
+    "max_nfev": 450,
+    "tolerance": 1e-07,
+    "load_steps": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ]
+  },
+  "source_hashes": {
+    "solver.py": "4820276dceb8a4efa79f918bb60b14b9d741bc467c95b5dc52499246f762c798",
+    "local_deformation.py": "4a8b1b3973bf9530b8c7bef357171ea40224224325c78f169bb6dc5c2de86e20",
+    "physical_candidates.py": "08c45a012ac5e6b93f87566f0368459b25cc746ead8947810de611395f7a3351"
+  },
+  "causal_tests": {
+    "test_a": {
+      "parameters": {
+        "concept": "test_a",
+        "reserve_hole_scale": 0.965,
+        "boundary_amplitude_mm": 0.25,
+        "boundary_width_mm": 1.0,
+        "interior_amplitude_mm": 0.4,
+        "interior_width_mm": 1.0,
+        "core_scale": 1.0,
+        "pitch_mm": 8.0,
+        "changed_paths": []
+      },
+      "geometry": {
+        "core_changed_area_mm2": 0.0,
+        "original_pitch": 8.0,
+        "core_node_positions_unchanged": true,
+        "original_holes_preserved": false
+      },
+      "stl_sha256": "0878189a9653db0be80e996a128b83ef92c3e1d3896e5dabb2400a44110bdd4a"
+    },
+    "test_b": {
+      "parameters": {
+        "concept": "test_b",
+        "reserve_hole_scale": 0.965,
+        "boundary_amplitude_mm": 0.25,
+        "boundary_width_mm": 1.0,
+        "interior_amplitude_mm": 0.4,
+        "interior_width_mm": 1.0,
+        "core_scale": 1.0,
+        "pitch_mm": 8.0,
+        "changed_paths": []
+      },
+      "geometry": {
+        "core_changed_area_mm2": 105.78076798659988,
+        "original_pitch": 8.0,
+        "core_node_positions_unchanged": true,
+        "original_holes_preserved": false
+      },
+      "stl_sha256": "325705c0ba3048de7c870e7117f1168235a2bf29d581a27489494296b0fd32de"
+    },
+    "test_c": {
+      "parameters": {
+        "concept": "test_c",
+        "reserve_hole_scale": 0.965,
+        "boundary_amplitude_mm": 0.25,
+        "boundary_width_mm": 1.0,
+        "interior_amplitude_mm": 0.4,
+        "interior_width_mm": 1.0,
+        "core_scale": 1.0,
+        "pitch_mm": 8.0,
+        "changed_paths": [
+          17,
+          18
+        ]
+      },
+      "geometry": {
+        "core_changed_area_mm2": 8.347489366400806e-15,
+        "original_pitch": 8.0,
+        "core_node_positions_unchanged": true,
+        "original_holes_preserved": false
+      },
+      "stl_sha256": "9124026beacdb9cd3baad1243bb79bca76d19868f72214ece78394560d2f749b"
+    },
+    "test_d": {
+      "parameters": {
+        "concept": "test_d",
+        "reserve_hole_scale": 0.965,
+        "boundary_amplitude_mm": 0.25,
+        "boundary_width_mm": 1.0,
+        "interior_amplitude_mm": 0.4,
+        "interior_width_mm": 1.0,
+        "core_scale": 1.0,
+        "pitch_mm": 8.0,
+        "changed_paths": [
+          17,
+          18
+        ]
+      },
+      "geometry": {
+        "core_changed_area_mm2": 105.78076084324992,
+        "original_pitch": 8.0,
+        "core_node_positions_unchanged": true,
+        "original_holes_preserved": false
+      },
+      "stl_sha256": "3bfd4a386d8ef65a7c36485362356cef0ba4e8f791ab4de9ad4844a6171f13d3"
+    }
+  },
+  "manufacturing": {
+    "line_width_mm": 0.4,
+    "min_ligament_mm": 0.8,
+    "min_gap_mm": 0.4,
+    "lattice_height_mm": 1.0,
+    "rim_height_mm": 4.0,
+    "notes": "Conservative geometric defaults, not a printer profile. Two nominal extrusion widths per structural path. Gap probe applies to main cells; tapered corners and peripheral slots require slicer review. Source rim retained."
+  },
+  "mechanism_rules": {
+    "low_stretch": 1.1,
+    "directional_ratio": 1.15,
+    "area_stretch": 1.2,
+    "min_biaxial": 1.04,
+    "axial_demand_pct": 30.0,
+    "feed_mm": 2.0,
+    "boundary_sensitivity_pp": 1.0,
+    "low_feed_mm": 2.0
+  }
+}
