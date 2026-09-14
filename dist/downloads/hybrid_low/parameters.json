@@ -1,0 +1,51 @@
+{
+  "design": {
+    "id": "hybrid_low",
+    "name": "Hybrid Low",
+    "family": "hybrid",
+    "intensity": "low",
+    "strength": 0.02,
+    "band": 0.4,
+    "amplitude": 0.15,
+    "width": 1.2
+  },
+  "geometry": {
+    "gradient_strength": 0.02,
+    "smoothing_mm": 12.0,
+    "critical_percentile": 75.0,
+    "compliant_width_mm": 1.2,
+    "wave_amplitude_mm": 0.65,
+    "boundary_core_scale": 0.99,
+    "boundary_wave_amplitude_mm": 0.15,
+    "minimum_ligament_mm": 0.8,
+    "minimum_gap_mm": 0.4,
+    "minimum_hole_scale": 0.8
+  },
+  "solver": {
+    "boundary_anchor": 2.0,
+    "interior_anchor": 0.0005,
+    "bending_weight": 0.01,
+    "max_nfev": 450,
+    "tolerance": 1e-07,
+    "load_steps": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ]
+  },
+  "manufacturing": {
+    "line_width_mm": 0.4,
+    "min_ligament_mm": 0.8,
+    "min_gap_mm": 0.4,
+    "lattice_height_mm": 1.0,
+    "rim_height_mm": 4.0,
+    "notes": "Conservative geometric defaults, not a printer profile. Two nominal extrusion widths per structural path. Gap probe applies to main cells; tapered corners and peripheral slots require slicer review. Source rim retained."
+  },
+  "source_hashes": {
+    "obj_1_HAB-2.stl": "2331b212661f33b116ba683dc18b64bf02df8d114985da8bea1c4ee2caa464a1",
+    "obj_2_Mold.stl": "da4dba3614539e0eeb5e83a2e9a5a3e473375b0c665bbccb59cc85af80b23c09",
+    "obj_3_Sub-merged body.stl": "5f4a2ff029e569bf3d345b1c1f2ff0a6c65ded83d8466e02a6e34a8074d651d0",
+    "obj_4_Push.stl": "513393da86433950b2bb61d9610cfbac2b3999ff4abae877010330a2ca98de9c"
+  }
+}

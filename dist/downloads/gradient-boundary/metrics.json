@@ -1,0 +1,268 @@
+{
+  "hab2": {
+    "metrics": {
+      "p50": 18.962818441261177,
+      "p90": 35.82988809083242,
+      "p95": 46.80520888634711,
+      "p99": 100.85856941734642,
+      "mean": 22.992216762934316,
+      "maximum": 103.37490386746899,
+      "std": 17.347492460605427,
+      "mean_xy_feed": 1.7259106845950305,
+      "max_xy_feed": 3.3904662231691653,
+      "critical_edges": 117,
+      "edge_count": 246,
+      "above_5_pct": 90.2439024390244,
+      "above_10_pct": 89.02439024390245,
+      "above_20_pct": 47.5609756097561,
+      "above_30_pct": 17.88617886178862,
+      "open_area": 62.34763021272803,
+      "open_area_mm2": 3078.492641558685,
+      "material_area_proxy": 1859.1331046885607,
+      "minimum_ligament_width": 0.95,
+      "mass_proxy": 3397.996025552224,
+      "mass_proxy_unit": "mm³ (volume, no assumed density)",
+      "lattice_thickness_mm": 1.0,
+      "rim_height_mm": 4.0
+    },
+    "score": {
+      "value": 1.3717382094948618,
+      "components": {
+        "p95": 1.3007262156473556,
+        "maximum": 1.6068365805367977,
+        "std": 1.60813301170205,
+        "material": 1.1172884964523844,
+        "open_area": 1.059616626609227
+      },
+      "weights": {
+        "p95": 0.35,
+        "maximum": 0.25,
+        "std": 0.15,
+        "material": 0.15,
+        "open_area": 0.1
+      },
+      "improvement_vs_original": {
+        "p95": -30.072621564735545,
+        "maximum": -60.683658053679764,
+        "std": -60.81330117020501,
+        "material_area_proxy": -11.728849645238443
+      }
+    },
+    "validation": {
+      "vertex_count": 3929,
+      "face_count": 8210,
+      "body_count": 1,
+      "bounds": [
+        [
+          128.33029174804688,
+          87.80611419677734,
+          0.0
+        ],
+        [
+          201.62451171875,
+          184.87908935546875,
+          4.0
+        ]
+      ],
+      "dimensions": [
+        73.29421997070312,
+        97.0729751586914,
+        4.0
+      ],
+      "watertight": true,
+      "volume": 3397.996025552226,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "winding_consistent": true,
+      "sha256": "346a36dc1c6467638ef26694d4db6707ae663a77480c9f721a47a59511d8a7c6",
+      "source_unchanged": false,
+      "printable_geometry_checks_passed": true,
+      "missing_original_rim_volume": 7.543279328577531e-07,
+      "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+      "slice_contours": 90
+    },
+    "solver": {
+      "success": true,
+      "message": "`xtol` termination condition is satisfied.",
+      "nfev": 1046,
+      "cost": 12.520468730150037,
+      "optimality": 0.5242414516604802,
+      "parameters": {
+        "boundary_anchor": 2.0,
+        "interior_anchor": 0.0005,
+        "bending_weight": 0.01,
+        "max_nfev": 450,
+        "tolerance": 1e-07,
+        "load_steps": [
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ]
+      },
+      "stages": [
+        {
+          "progress": 0.25,
+          "success": true,
+          "nfev": 119,
+          "cost": 0.08272417697586808,
+          "optimality": 0.13273144581626609
+        },
+        {
+          "progress": 0.5,
+          "success": false,
+          "nfev": 450,
+          "cost": 1.21166303755164,
+          "optimality": 1.0913673801537704
+        },
+        {
+          "progress": 0.75,
+          "success": true,
+          "nfev": 243,
+          "cost": 4.799968613147576,
+          "optimality": 0.11304374892123034
+        },
+        {
+          "progress": 1.0,
+          "success": true,
+          "nfev": 234,
+          "cost": 12.520468730150037,
+          "optimality": 0.5242414516604802
+        }
+      ]
+    }
+  },
+  "submerged": {
+    "metrics": {
+      "p50": 18.310998663473633,
+      "p90": 54.35737596512028,
+      "p95": 104.32179558133537,
+      "p99": 129.94085706432242,
+      "mean": 27.451708912427037,
+      "maximum": 148.59736452432685,
+      "std": 28.038191746249133,
+      "mean_xy_feed": 1.0201272418110299,
+      "max_xy_feed": 2.2739275545418707,
+      "critical_edges": 115,
+      "edge_count": 246,
+      "above_5_pct": 95.1219512195122,
+      "above_10_pct": 71.54471544715447,
+      "above_20_pct": 46.7479674796748,
+      "above_30_pct": 28.455284552845526,
+      "open_area": 63.855263353687214,
+      "open_area_mm2": 3152.9473598412233,
+      "material_area_proxy": 1784.6994279848607,
+      "minimum_ligament_width": 0.95,
+      "mass_proxy": 3324.364359027694,
+      "mass_proxy_unit": "mm³ (volume, no assumed density)",
+      "lattice_thickness_mm": 1.0,
+      "rim_height_mm": 4.0
+    },
+    "score": {
+      "value": 1.6493588012308495,
+      "components": {
+        "p95": 1.8805344369992778,
+        "maximum": 1.7720726791321038,
+        "std": 1.8905614201669558,
+        "material": 1.0725459683324465,
+        "open_area": 1.0368747022316591
+      },
+      "weights": {
+        "p95": 0.35,
+        "maximum": 0.25,
+        "std": 0.15,
+        "material": 0.15,
+        "open_area": 0.1
+      },
+      "improvement_vs_original": {
+        "p95": -88.05344369992778,
+        "maximum": -77.20726791321037,
+        "std": -89.05614201669557,
+        "material_area_proxy": -7.254596833244659
+      }
+    },
+    "validation": {
+      "vertex_count": 3951,
+      "face_count": 8254,
+      "body_count": 1,
+      "bounds": [
+        [
+          54.37548065185547,
+          71.12090301513672,
+          0.0
+        ],
+        [
+          127.66971588134766,
+          168.19387817382812,
+          4.0
+        ]
+      ],
+      "dimensions": [
+        73.29423522949219,
+        97.0729751586914,
+        4.0
+      ],
+      "watertight": true,
+      "volume": 3324.364359027694,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "winding_consistent": true,
+      "sha256": "1e95cc6ab0dfd74b9b63294cf5696c9b61e73de9a14d1100d89daf8edc35f464",
+      "source_unchanged": false,
+      "printable_geometry_checks_passed": true,
+      "missing_original_rim_volume": 2.311212786783775e-06,
+      "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+      "slice_contours": 90
+    },
+    "solver": {
+      "success": true,
+      "message": "`xtol` termination condition is satisfied.",
+      "nfev": 668,
+      "cost": 19.717595353381114,
+      "optimality": 11.0797568020246,
+      "parameters": {
+        "boundary_anchor": 2.0,
+        "interior_anchor": 0.0005,
+        "bending_weight": 0.01,
+        "max_nfev": 450,
+        "tolerance": 1e-07,
+        "load_steps": [
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ]
+      },
+      "stages": [
+        {
+          "progress": 0.25,
+          "success": true,
+          "nfev": 51,
+          "cost": 0.10475542536308732,
+          "optimality": 0.37488864848601117
+        },
+        {
+          "progress": 0.5,
+          "success": true,
+          "nfev": 395,
+          "cost": 1.4626989781513822,
+          "optimality": 1.3877039305279626
+        },
+        {
+          "progress": 0.75,
+          "success": true,
+          "nfev": 123,
+          "cost": 6.90471800106762,
+          "optimality": 2.8652462775229535
+        },
+        {
+          "progress": 1.0,
+          "success": true,
+          "nfev": 99,
+          "cost": 19.717595353381114,
+          "optimality": 11.0797568020246
+        }
+      ]
+    }
+  }
+}

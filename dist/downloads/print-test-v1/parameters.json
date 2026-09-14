@@ -1,0 +1,12 @@
+{
+  "gradient_strength": 0.035,
+  "smoothing_mm": 12.0,
+  "critical_percentile": 75.0,
+  "compliant_width_mm": 1.0,
+  "wave_amplitude_mm": 0.65,
+  "boundary_core_scale": 1.0,
+  "boundary_wave_amplitude_mm": 0.0,
+  "minimum_ligament_mm": 0.8,
+  "minimum_gap_mm": 0.4,
+  "minimum_hole_scale": 0.8
+}

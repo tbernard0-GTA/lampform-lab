@@ -1,0 +1,1190 @@
+{
+  "version": "0.4.0",
+  "generated_at": "2026-09-14T15:37:15.857506+00:00",
+  "python": "3.12.14",
+  "source_hashes": {
+    "obj_1_HAB-2.stl": "2331b212661f33b116ba683dc18b64bf02df8d114985da8bea1c4ee2caa464a1",
+    "obj_2_Mold.stl": "da4dba3614539e0eeb5e83a2e9a5a3e473375b0c665bbccb59cc85af80b23c09",
+    "obj_3_Sub-merged body.stl": "5f4a2ff029e569bf3d345b1c1f2ff0a6c65ded83d8466e02a6e34a8074d651d0",
+    "obj_4_Push.stl": "513393da86433950b2bb61d9610cfbac2b3999ff4abae877010330a2ca98de9c"
+  },
+  "geometry": {
+    "hab2": {
+      "thickness": 1.0,
+      "rim_height": 4.0,
+      "pitch": 8.0,
+      "core_nodes": 162,
+      "core_edges": 226,
+      "contacts": 20
+    },
+    "submerged": {
+      "thickness": 1.0,
+      "rim_height": 4.0,
+      "pitch": 8.0,
+      "core_nodes": 162,
+      "core_edges": 226,
+      "contacts": 20
+    }
+  },
+  "score_weights": {
+    "p95": 0.35,
+    "maximum": 0.25,
+    "std": 0.15,
+    "material": 0.15,
+    "open_area": 0.1
+  },
+  "common_color_ranges": {
+    "demand": [
+      0,
+      180
+    ],
+    "width": [
+      0.8,
+      4
+    ],
+    "hole_size": [
+      4,
+      7.1
+    ],
+    "compliance": [
+      1,
+      1.5
+    ]
+  },
+  "recommendation": {
+    "overall_id": "gradient",
+    "overall_name": "Gradient",
+    "candidate_id": "gradient",
+    "candidate_name": "Gradient",
+    "beats_original": true,
+    "reason": "Gradient tem o menor score combinado entre as alternativas novas (0.965). A vantagem é apenas prevista pelo modelo e depende de validação física."
+  },
+  "designs": [
+    {
+      "id": "original",
+      "name": "Original",
+      "hab2": {
+        "metrics": {
+          "p50": 22.791383610213032,
+          "p90": 34.33385108101277,
+          "p95": 35.983905239468655,
+          "p99": 45.29095241804262,
+          "mean": 21.339824936479406,
+          "maximum": 64.33442275314296,
+          "std": 10.787349264253221,
+          "mean_xy_feed": 3.104205971257487,
+          "max_xy_feed": 10.309418676343752,
+          "critical_edges": 151,
+          "edge_count": 246,
+          "above_5_pct": 89.83739837398373,
+          "above_10_pct": 82.52032520325203,
+          "above_20_pct": 61.382113821138205,
+          "above_30_pct": 18.29268292682927,
+          "open_area": 66.30022603219686,
+          "open_area_mm2": 3273.6570303858707,
+          "material_area_proxy": 1663.9687158613751,
+          "minimum_ligament_width": 1.0719843603860508,
+          "mass_proxy": 3203.1180031037297,
+          "mass_proxy_unit": "mm³ (volume, no assumed density)",
+          "lattice_thickness_mm": 1.0,
+          "rim_height_mm": 4.0
+        },
+        "score": {
+          "value": 1.0,
+          "components": {
+            "p95": 1.0,
+            "maximum": 1.0,
+            "std": 1.0,
+            "material": 1.0,
+            "open_area": 1.0
+          },
+          "weights": {
+            "p95": 0.35,
+            "maximum": 0.25,
+            "std": 0.15,
+            "material": 0.15,
+            "open_area": 0.1
+          },
+          "improvement_vs_original": {
+            "p95": 0.0,
+            "maximum": 0.0,
+            "std": 0.0,
+            "material_area_proxy": 0.0
+          }
+        },
+        "validation": {
+          "vertex_count": 3837,
+          "face_count": 9028,
+          "body_count": 3,
+          "bounds": [
+            [
+              128.33029174804688,
+              87.80611419677734,
+              0.0
+            ],
+            [
+              201.62451171875,
+              184.87908935546875,
+              4.0
+            ]
+          ],
+          "dimensions": [
+            73.29421997070312,
+            97.0729751586914,
+            4.0
+          ],
+          "watertight": false,
+          "volume": 3203.1180031037293,
+          "degenerate_faces": 0,
+          "duplicate_faces": 503,
+          "winding_consistent": true,
+          "sha256": "2331b212661f33b116ba683dc18b64bf02df8d114985da8bea1c4ee2caa464a1",
+          "source_unchanged": true,
+          "printable_geometry_checks_passed": false
+        },
+        "solver": {
+          "success": true,
+          "message": "Both `ftol` and `xtol` termination conditions are satisfied.",
+          "nfev": 121,
+          "cost": 7.879185910648291,
+          "optimality": 0.09693199530966096,
+          "parameters": {
+            "boundary_anchor": 2.0,
+            "interior_anchor": 0.0005,
+            "bending_weight": 0.01,
+            "max_nfev": 450,
+            "tolerance": 1e-07,
+            "load_steps": [
+              0.25,
+              0.5,
+              0.75,
+              1.0
+            ]
+          },
+          "stages": [
+            {
+              "progress": 0.25,
+              "success": true,
+              "nfev": 22,
+              "cost": 0.0729059547794405,
+              "optimality": 0.03046774408976132
+            },
+            {
+              "progress": 0.5,
+              "success": true,
+              "nfev": 35,
+              "cost": 1.0500112043648435,
+              "optimality": 0.10412777889605455
+            },
+            {
+              "progress": 0.75,
+              "success": true,
+              "nfev": 34,
+              "cost": 3.568648409997873,
+              "optimality": 0.28581917293143794
+            },
+            {
+              "progress": 1.0,
+              "success": true,
+              "nfev": 30,
+              "cost": 7.879185910648291,
+              "optimality": 0.09693199530966096
+            }
+          ]
+        },
+        "data": "data/designs/original/hab2.json",
+        "changed_edges": 0,
+        "nodes": 182,
+        "contacts": 20,
+        "stl": "downloads/original/HAB-2.stl"
+      },
+      "submerged": {
+        "metrics": {
+          "p50": 26.449834335781674,
+          "p90": 47.4751191380432,
+          "p95": 55.47454677182039,
+          "p99": 70.12373402277261,
+          "mean": 28.38328783076193,
+          "maximum": 83.85511851415959,
+          "std": 14.830616687276457,
+          "mean_xy_feed": 2.28226834580149,
+          "max_xy_feed": 6.065193128872302,
+          "critical_edges": 191,
+          "edge_count": 246,
+          "above_5_pct": 92.6829268292683,
+          "above_10_pct": 87.8048780487805,
+          "above_20_pct": 77.64227642276423,
+          "above_30_pct": 39.83739837398374,
+          "open_area": 66.30005825996508,
+          "open_area_mm2": 3273.662696999988,
+          "material_area_proxy": 1663.9840908260958,
+          "minimum_ligament_width": 1.0719861223166447,
+          "mass_proxy": 3203.9352759859553,
+          "mass_proxy_unit": "mm³ (volume, no assumed density)",
+          "lattice_thickness_mm": 1.0,
+          "rim_height_mm": 4.0
+        },
+        "score": {
+          "value": 1.0,
+          "components": {
+            "p95": 1.0,
+            "maximum": 1.0,
+            "std": 1.0,
+            "material": 1.0,
+            "open_area": 1.0
+          },
+          "weights": {
+            "p95": 0.35,
+            "maximum": 0.25,
+            "std": 0.15,
+            "material": 0.15,
+            "open_area": 0.1
+          },
+          "improvement_vs_original": {
+            "p95": 0.0,
+            "maximum": 0.0,
+            "std": 0.0,
+            "material_area_proxy": 0.0
+          }
+        },
+        "validation": {
+          "vertex_count": 3852,
+          "face_count": 9058,
+          "body_count": 3,
+          "bounds": [
+            [
+              54.375484466552734,
+              71.12090301513672,
+              0.0
+            ],
+            [
+              127.66971588134766,
+              168.19387817382812,
+              4.0
+            ]
+          ],
+          "dimensions": [
+            73.29423141479492,
+            97.0729751586914,
+            4.0
+          ],
+          "watertight": false,
+          "volume": 3203.9352759859553,
+          "degenerate_faces": 0,
+          "duplicate_faces": 503,
+          "winding_consistent": true,
+          "sha256": "5f4a2ff029e569bf3d345b1c1f2ff0a6c65ded83d8466e02a6e34a8074d651d0",
+          "source_unchanged": true,
+          "printable_geometry_checks_passed": false
+        },
+        "solver": {
+          "success": true,
+          "message": "`xtol` termination condition is satisfied.",
+          "nfev": 167,
+          "cost": 12.12730430652433,
+          "optimality": 7.535369792806962,
+          "parameters": {
+            "boundary_anchor": 2.0,
+            "interior_anchor": 0.0005,
+            "bending_weight": 0.01,
+            "max_nfev": 450,
+            "tolerance": 1e-07,
+            "load_steps": [
+              0.25,
+              0.5,
+              0.75,
+              1.0
+            ]
+          },
+          "stages": [
+            {
+              "progress": 0.25,
+              "success": true,
+              "nfev": 33,
+              "cost": 0.08989373955103089,
+              "optimality": 0.011136317429758161
+            },
+            {
+              "progress": 0.5,
+              "success": true,
+              "nfev": 33,
+              "cost": 1.1579231179779328,
+              "optimality": 0.15420287984287184
+            },
+            {
+              "progress": 0.75,
+              "success": true,
+              "nfev": 36,
+              "cost": 4.622464644897793,
+              "optimality": 2.0182983228936777
+            },
+            {
+              "progress": 1.0,
+              "success": true,
+              "nfev": 65,
+              "cost": 12.12730430652433,
+              "optimality": 7.535369792806962
+            }
+          ]
+        },
+        "data": "data/designs/original/submerged.json",
+        "changed_edges": 0,
+        "nodes": 182,
+        "contacts": 20,
+        "stl": "downloads/original/Sub-Merged.stl"
+      },
+      "combined_score": 1.0,
+      "combined_improvement_pct": 0.0,
+      "zip": "downloads/lampform-original.zip"
+    },
+    {
+      "id": "gradient",
+      "name": "Gradient",
+      "hab2": {
+        "metrics": {
+          "p50": 20.053566465098207,
+          "p90": 28.029366275341303,
+          "p95": 29.613266580688062,
+          "p99": 34.932513526155255,
+          "mean": 18.611240055883734,
+          "maximum": 36.97890215364741,
+          "std": 8.31795465257602,
+          "mean_xy_feed": 3.1265264592552633,
+          "max_xy_feed": 10.417781794739742,
+          "critical_edges": 123,
+          "edge_count": 246,
+          "above_5_pct": 92.6829268292683,
+          "above_10_pct": 82.92682926829268,
+          "above_20_pct": 50.0,
+          "above_30_pct": 4.0650406504065035,
+          "open_area": 59.31112024118543,
+          "open_area_mm2": 2928.561143416433,
+          "material_area_proxy": 2009.0646028308117,
+          "minimum_ligament_width": 1.071984360386054,
+          "mass_proxy": 3547.9667780253753,
+          "mass_proxy_unit": "mm³ (volume, no assumed density)",
+          "lattice_thickness_mm": 1.0,
+          "rim_height_mm": 4.0
+        },
+        "score": {
+          "value": 0.8390467169213897,
+          "components": {
+            "p95": 0.8229586639808898,
+            "maximum": 0.5747918543629252,
+            "std": 0.7710842069552524,
+            "material": 1.2073932542600678,
+            "open_area": 1.1054160175504888
+          },
+          "weights": {
+            "p95": 0.35,
+            "maximum": 0.25,
+            "std": 0.15,
+            "material": 0.15,
+            "open_area": 0.1
+          },
+          "improvement_vs_original": {
+            "p95": 17.704133601911025,
+            "maximum": 42.520814563707475,
+            "std": 22.891579304474764,
+            "material_area_proxy": -20.739325426006776
+          }
+        },
+        "validation": {
+          "vertex_count": 2717,
+          "face_count": 5910,
+          "body_count": 1,
+          "bounds": [
+            [
+              128.33029174804688,
+              87.80611419677734,
+              0.0
+            ],
+            [
+              201.62451171875,
+              184.87908935546875,
+              4.0
+            ]
+          ],
+          "dimensions": [
+            73.29421997070312,
+            97.0729751586914,
+            4.0
+          ],
+          "watertight": true,
+          "volume": 3547.9667780253744,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "winding_consistent": true,
+          "sha256": "af85dccee00bfc908a1fa523d266c7526ace2bba8ff1c852429927712bb9e110",
+          "source_unchanged": false,
+          "printable_geometry_checks_passed": true,
+          "missing_original_rim_volume": 2.201446325974151e-07,
+          "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+          "slice_contours": 123
+        },
+        "solver": {
+          "success": true,
+          "message": "`xtol` termination condition is satisfied.",
+          "nfev": 143,
+          "cost": 9.40140125005031,
+          "optimality": 2.667505910552465,
+          "parameters": {
+            "boundary_anchor": 2.0,
+            "interior_anchor": 0.0005,
+            "bending_weight": 0.01,
+            "max_nfev": 450,
+            "tolerance": 1e-07,
+            "load_steps": [
+              0.25,
+              0.5,
+              0.75,
+              1.0
+            ]
+          },
+          "stages": [
+            {
+              "progress": 0.25,
+              "success": true,
+              "nfev": 16,
+              "cost": 0.11051572576320905,
+              "optimality": 0.00015994333532800767
+            },
+            {
+              "progress": 0.5,
+              "success": true,
+              "nfev": 34,
+              "cost": 1.4579238960160563,
+              "optimality": 0.09004657539203559
+            },
+            {
+              "progress": 0.75,
+              "success": true,
+              "nfev": 45,
+              "cost": 4.995043638882207,
+              "optimality": 0.13684084685210732
+            },
+            {
+              "progress": 1.0,
+              "success": true,
+              "nfev": 48,
+              "cost": 9.40140125005031,
+              "optimality": 2.667505910552465
+            }
+          ]
+        },
+        "data": "data/designs/gradient/hab2.json",
+        "changed_edges": 0,
+        "nodes": 182,
+        "contacts": 20,
+        "stl": "downloads/gradient/HAB-2.stl"
+      },
+      "submerged": {
+        "metrics": {
+          "p50": 26.64715415057668,
+          "p90": 44.39626012981445,
+          "p95": 51.443475574547975,
+          "p99": 97.612624616376,
+          "mean": 28.721615941115683,
+          "maximum": 107.79724689346577,
+          "std": 16.43696468868256,
+          "mean_xy_feed": 2.2827894247007197,
+          "max_xy_feed": 5.44449489145342,
+          "critical_edges": 193,
+          "edge_count": 246,
+          "above_5_pct": 95.9349593495935,
+          "above_10_pct": 90.2439024390244,
+          "above_20_pct": 78.45528455284553,
+          "above_30_pct": 35.77235772357724,
+          "open_area": 61.41564611747521,
+          "open_area_mm2": 3032.4876777421496,
+          "material_area_proxy": 1905.1591100839341,
+          "minimum_ligament_width": 1.071990153695043,
+          "mass_proxy": 3444.8661051739205,
+          "mass_proxy_unit": "mm³ (volume, no assumed density)",
+          "lattice_thickness_mm": 1.0,
+          "rim_height_mm": 4.0
+        },
+        "score": {
+          "value": 1.0913014341842908,
+          "components": {
+            "p95": 0.9273347610417956,
+            "maximum": 1.2855177931119777,
+            "std": 1.1083129606325965,
+            "material": 1.1449382963379808,
+            "open_area": 1.0736713099608133
+          },
+          "weights": {
+            "p95": 0.35,
+            "maximum": 0.25,
+            "std": 0.15,
+            "material": 0.15,
+            "open_area": 0.1
+          },
+          "improvement_vs_original": {
+            "p95": 7.266523895820444,
+            "maximum": -28.551779311197762,
+            "std": -10.831296063259654,
+            "material_area_proxy": -14.493829633798088
+          }
+        },
+        "validation": {
+          "vertex_count": 2730,
+          "face_count": 5936,
+          "body_count": 1,
+          "bounds": [
+            [
+              54.37548065185547,
+              71.12090301513672,
+              0.0
+            ],
+            [
+              127.66971588134766,
+              168.19387817382812,
+              4.0
+            ]
+          ],
+          "dimensions": [
+            73.29423522949219,
+            97.0729751586914,
+            4.0
+          ],
+          "watertight": true,
+          "volume": 3444.8661051739214,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "winding_consistent": true,
+          "sha256": "ebc7cfb418725b0c809e557df0237f43570ec91e21528f02e8d97c43b422bb40",
+          "source_unchanged": false,
+          "printable_geometry_checks_passed": true,
+          "missing_original_rim_volume": 4.074012849741848e-06,
+          "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+          "slice_contours": 123
+        },
+        "solver": {
+          "success": true,
+          "message": "`xtol` termination condition is satisfied.",
+          "nfev": 151,
+          "cost": 15.507657508075054,
+          "optimality": 12.689904552997087,
+          "parameters": {
+            "boundary_anchor": 2.0,
+            "interior_anchor": 0.0005,
+            "bending_weight": 0.01,
+            "max_nfev": 450,
+            "tolerance": 1e-07,
+            "load_steps": [
+              0.25,
+              0.5,
+              0.75,
+              1.0
+            ]
+          },
+          "stages": [
+            {
+              "progress": 0.25,
+              "success": true,
+              "nfev": 17,
+              "cost": 0.12497991170604132,
+              "optimality": 0.000326911861449574
+            },
+            {
+              "progress": 0.5,
+              "success": true,
+              "nfev": 45,
+              "cost": 1.5140629328184092,
+              "optimality": 0.28670932895664053
+            },
+            {
+              "progress": 0.75,
+              "success": true,
+              "nfev": 25,
+              "cost": 6.1426057898664626,
+              "optimality": 5.2211047661582715
+            },
+            {
+              "progress": 1.0,
+              "success": true,
+              "nfev": 64,
+              "cost": 15.507657508075054,
+              "optimality": 12.689904552997087
+            }
+          ]
+        },
+        "data": "data/designs/gradient/submerged.json",
+        "changed_edges": 0,
+        "nodes": 182,
+        "contacts": 20,
+        "stl": "downloads/gradient/Sub-Merged.stl"
+      },
+      "combined_score": 0.9651740755528402,
+      "combined_improvement_pct": 3.4825924447159817,
+      "zip": "downloads/lampform-gradient.zip"
+    },
+    {
+      "id": "gradient_boundary",
+      "name": "Gradient + Compliant Boundary",
+      "hab2": {
+        "metrics": {
+          "p50": 18.962818441261177,
+          "p90": 35.82988809083242,
+          "p95": 46.80520888634711,
+          "p99": 100.85856941734642,
+          "mean": 22.992216762934316,
+          "maximum": 103.37490386746899,
+          "std": 17.347492460605427,
+          "mean_xy_feed": 1.7259106845950305,
+          "max_xy_feed": 3.3904662231691653,
+          "critical_edges": 117,
+          "edge_count": 246,
+          "above_5_pct": 90.2439024390244,
+          "above_10_pct": 89.02439024390245,
+          "above_20_pct": 47.5609756097561,
+          "above_30_pct": 17.88617886178862,
+          "open_area": 62.34763021272803,
+          "open_area_mm2": 3078.492641558685,
+          "material_area_proxy": 1859.1331046885607,
+          "minimum_ligament_width": 0.95,
+          "mass_proxy": 3397.996025552224,
+          "mass_proxy_unit": "mm³ (volume, no assumed density)",
+          "lattice_thickness_mm": 1.0,
+          "rim_height_mm": 4.0
+        },
+        "score": {
+          "value": 1.3717382094948618,
+          "components": {
+            "p95": 1.3007262156473556,
+            "maximum": 1.6068365805367977,
+            "std": 1.60813301170205,
+            "material": 1.1172884964523844,
+            "open_area": 1.059616626609227
+          },
+          "weights": {
+            "p95": 0.35,
+            "maximum": 0.25,
+            "std": 0.15,
+            "material": 0.15,
+            "open_area": 0.1
+          },
+          "improvement_vs_original": {
+            "p95": -30.072621564735545,
+            "maximum": -60.683658053679764,
+            "std": -60.81330117020501,
+            "material_area_proxy": -11.728849645238443
+          }
+        },
+        "validation": {
+          "vertex_count": 3929,
+          "face_count": 8210,
+          "body_count": 1,
+          "bounds": [
+            [
+              128.33029174804688,
+              87.80611419677734,
+              0.0
+            ],
+            [
+              201.62451171875,
+              184.87908935546875,
+              4.0
+            ]
+          ],
+          "dimensions": [
+            73.29421997070312,
+            97.0729751586914,
+            4.0
+          ],
+          "watertight": true,
+          "volume": 3397.996025552226,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "winding_consistent": true,
+          "sha256": "346a36dc1c6467638ef26694d4db6707ae663a77480c9f721a47a59511d8a7c6",
+          "source_unchanged": false,
+          "printable_geometry_checks_passed": true,
+          "missing_original_rim_volume": 7.543279328577531e-07,
+          "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+          "slice_contours": 90
+        },
+        "solver": {
+          "success": true,
+          "message": "`xtol` termination condition is satisfied.",
+          "nfev": 1046,
+          "cost": 12.520468730150037,
+          "optimality": 0.5242414516604802,
+          "parameters": {
+            "boundary_anchor": 2.0,
+            "interior_anchor": 0.0005,
+            "bending_weight": 0.01,
+            "max_nfev": 450,
+            "tolerance": 1e-07,
+            "load_steps": [
+              0.25,
+              0.5,
+              0.75,
+              1.0
+            ]
+          },
+          "stages": [
+            {
+              "progress": 0.25,
+              "success": true,
+              "nfev": 119,
+              "cost": 0.08272417697586808,
+              "optimality": 0.13273144581626609
+            },
+            {
+              "progress": 0.5,
+              "success": false,
+              "nfev": 450,
+              "cost": 1.21166303755164,
+              "optimality": 1.0913673801537704
+            },
+            {
+              "progress": 0.75,
+              "success": true,
+              "nfev": 243,
+              "cost": 4.799968613147576,
+              "optimality": 0.11304374892123034
+            },
+            {
+              "progress": 1.0,
+              "success": true,
+              "nfev": 234,
+              "cost": 12.520468730150037,
+              "optimality": 0.5242414516604802
+            }
+          ]
+        },
+        "data": "data/designs/gradient_boundary/hab2.json",
+        "changed_edges": 0,
+        "nodes": 322,
+        "contacts": 20,
+        "stl": "downloads/gradient-boundary/HAB-2.stl"
+      },
+      "submerged": {
+        "metrics": {
+          "p50": 18.310998663473633,
+          "p90": 54.35737596512028,
+          "p95": 104.32179558133537,
+          "p99": 129.94085706432242,
+          "mean": 27.451708912427037,
+          "maximum": 148.59736452432685,
+          "std": 28.038191746249133,
+          "mean_xy_feed": 1.0201272418110299,
+          "max_xy_feed": 2.2739275545418707,
+          "critical_edges": 115,
+          "edge_count": 246,
+          "above_5_pct": 95.1219512195122,
+          "above_10_pct": 71.54471544715447,
+          "above_20_pct": 46.7479674796748,
+          "above_30_pct": 28.455284552845526,
+          "open_area": 63.855263353687214,
+          "open_area_mm2": 3152.9473598412233,
+          "material_area_proxy": 1784.6994279848607,
+          "minimum_ligament_width": 0.95,
+          "mass_proxy": 3324.364359027694,
+          "mass_proxy_unit": "mm³ (volume, no assumed density)",
+          "lattice_thickness_mm": 1.0,
+          "rim_height_mm": 4.0
+        },
+        "score": {
+          "value": 1.6493588012308495,
+          "components": {
+            "p95": 1.8805344369992778,
+            "maximum": 1.7720726791321038,
+            "std": 1.8905614201669558,
+            "material": 1.0725459683324465,
+            "open_area": 1.0368747022316591
+          },
+          "weights": {
+            "p95": 0.35,
+            "maximum": 0.25,
+            "std": 0.15,
+            "material": 0.15,
+            "open_area": 0.1
+          },
+          "improvement_vs_original": {
+            "p95": -88.05344369992778,
+            "maximum": -77.20726791321037,
+            "std": -89.05614201669557,
+            "material_area_proxy": -7.254596833244659
+          }
+        },
+        "validation": {
+          "vertex_count": 3951,
+          "face_count": 8254,
+          "body_count": 1,
+          "bounds": [
+            [
+              54.37548065185547,
+              71.12090301513672,
+              0.0
+            ],
+            [
+              127.66971588134766,
+              168.19387817382812,
+              4.0
+            ]
+          ],
+          "dimensions": [
+            73.29423522949219,
+            97.0729751586914,
+            4.0
+          ],
+          "watertight": true,
+          "volume": 3324.364359027694,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "winding_consistent": true,
+          "sha256": "1e95cc6ab0dfd74b9b63294cf5696c9b61e73de9a14d1100d89daf8edc35f464",
+          "source_unchanged": false,
+          "printable_geometry_checks_passed": true,
+          "missing_original_rim_volume": 2.311212786783775e-06,
+          "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+          "slice_contours": 90
+        },
+        "solver": {
+          "success": true,
+          "message": "`xtol` termination condition is satisfied.",
+          "nfev": 668,
+          "cost": 19.717595353381114,
+          "optimality": 11.0797568020246,
+          "parameters": {
+            "boundary_anchor": 2.0,
+            "interior_anchor": 0.0005,
+            "bending_weight": 0.01,
+            "max_nfev": 450,
+            "tolerance": 1e-07,
+            "load_steps": [
+              0.25,
+              0.5,
+              0.75,
+              1.0
+            ]
+          },
+          "stages": [
+            {
+              "progress": 0.25,
+              "success": true,
+              "nfev": 51,
+              "cost": 0.10475542536308732,
+              "optimality": 0.37488864848601117
+            },
+            {
+              "progress": 0.5,
+              "success": true,
+              "nfev": 395,
+              "cost": 1.4626989781513822,
+              "optimality": 1.3877039305279626
+            },
+            {
+              "progress": 0.75,
+              "success": true,
+              "nfev": 123,
+              "cost": 6.90471800106762,
+              "optimality": 2.8652462775229535
+            },
+            {
+              "progress": 1.0,
+              "success": true,
+              "nfev": 99,
+              "cost": 19.717595353381114,
+              "optimality": 11.0797568020246
+            }
+          ]
+        },
+        "data": "data/designs/gradient_boundary/submerged.json",
+        "changed_edges": 0,
+        "nodes": 322,
+        "contacts": 20,
+        "stl": "downloads/gradient-boundary/Sub-Merged.stl"
+      },
+      "combined_score": 1.5105485053628556,
+      "combined_improvement_pct": -51.05485053628556,
+      "zip": "downloads/lampform-gradient-boundary.zip"
+    },
+    {
+      "id": "compliant",
+      "name": "Compliant",
+      "hab2": {
+        "metrics": {
+          "p50": 20.655946562279425,
+          "p90": 31.08881949950856,
+          "p95": 34.23745049492851,
+          "p99": 41.332040020479916,
+          "mean": 18.998762215620477,
+          "maximum": 57.833020714318465,
+          "std": 10.004921998485921,
+          "mean_xy_feed": 2.7831836318592926,
+          "max_xy_feed": 10.394007094901195,
+          "critical_edges": 127,
+          "edge_count": 246,
+          "above_5_pct": 87.8048780487805,
+          "above_10_pct": 79.26829268292683,
+          "above_20_pct": 51.6260162601626,
+          "above_30_pct": 11.38211382113821,
+          "open_area": 66.13748445450081,
+          "open_area_mm2": 3265.621460345701,
+          "material_area_proxy": 1672.004285901544,
+          "minimum_ligament_width": 0.95,
+          "mass_proxy": 3210.910739156005,
+          "mass_proxy_unit": "mm³ (volume, no assumed density)",
+          "lattice_thickness_mm": 1.0,
+          "rim_height_mm": 4.0
+        },
+        "score": {
+          "value": 0.9478389424161566,
+          "components": {
+            "p95": 0.9514656696398656,
+            "maximum": 0.8989436485072546,
+            "std": 0.9274680696248445,
+            "material": 1.0048291593246748,
+            "open_area": 1.002454615729621
+          },
+          "weights": {
+            "p95": 0.35,
+            "maximum": 0.25,
+            "std": 0.15,
+            "material": 0.15,
+            "open_area": 0.1
+          },
+          "improvement_vs_original": {
+            "p95": 4.853433036013446,
+            "maximum": 10.105635149274544,
+            "std": 7.253193037515554,
+            "material_area_proxy": -0.4829159324674719
+          }
+        },
+        "validation": {
+          "vertex_count": 5515,
+          "face_count": 11506,
+          "body_count": 1,
+          "bounds": [
+            [
+              128.33029174804688,
+              87.80611419677734,
+              0.0
+            ],
+            [
+              201.62451171875,
+              184.87908935546875,
+              4.0
+            ]
+          ],
+          "dimensions": [
+            73.29421997070312,
+            97.0729751586914,
+            4.0
+          ],
+          "watertight": true,
+          "volume": 3210.9107391560046,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "winding_consistent": true,
+          "sha256": "cc730cad2f32f2e0403f4d4713c09009e6f39326b11b8f10dbbdcead8087bc5b",
+          "source_unchanged": false,
+          "printable_geometry_checks_passed": true,
+          "missing_original_rim_volume": 2.201446325974151e-07,
+          "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+          "slice_contours": 123
+        },
+        "solver": {
+          "success": true,
+          "message": "`xtol` termination condition is satisfied.",
+          "nfev": 199,
+          "cost": 6.42736798887993,
+          "optimality": 0.25857199844011497,
+          "parameters": {
+            "boundary_anchor": 2.0,
+            "interior_anchor": 0.0005,
+            "bending_weight": 0.01,
+            "max_nfev": 450,
+            "tolerance": 1e-07,
+            "load_steps": [
+              0.25,
+              0.5,
+              0.75,
+              1.0
+            ]
+          },
+          "stages": [
+            {
+              "progress": 0.25,
+              "success": true,
+              "nfev": 38,
+              "cost": 0.053975889511015264,
+              "optimality": 0.0026060907271506697
+            },
+            {
+              "progress": 0.5,
+              "success": true,
+              "nfev": 42,
+              "cost": 0.7273210660438255,
+              "optimality": 0.25422983229809837
+            },
+            {
+              "progress": 0.75,
+              "success": true,
+              "nfev": 33,
+              "cost": 2.890690456296388,
+              "optimality": 0.6010308999311965
+            },
+            {
+              "progress": 1.0,
+              "success": true,
+              "nfev": 86,
+              "cost": 6.42736798887993,
+              "optimality": 0.25857199844011497
+            }
+          ]
+        },
+        "data": "data/designs/compliant/hab2.json",
+        "changed_edges": 50,
+        "nodes": 532,
+        "contacts": 20,
+        "stl": "downloads/compliant/HAB-2.stl"
+      },
+      "submerged": {
+        "metrics": {
+          "p50": 21.589576814220322,
+          "p90": 53.40811960164598,
+          "p95": 59.55799079186802,
+          "p99": 79.74955381302647,
+          "mean": 27.638867493630826,
+          "maximum": 91.2813521870161,
+          "std": 17.331999881261293,
+          "mean_xy_feed": 1.7794474124066044,
+          "max_xy_feed": 5.494705450176785,
+          "critical_edges": 140,
+          "edge_count": 246,
+          "above_5_pct": 93.4959349593496,
+          "above_10_pct": 88.6178861788618,
+          "above_20_pct": 56.91056910569105,
+          "above_30_pct": 36.17886178861789,
+          "open_area": 66.18975310368687,
+          "open_area_mm2": 3268.21621799421,
+          "material_area_proxy": 1669.4305698318735,
+          "minimum_ligament_width": 0.95,
+          "mass_proxy": 3209.1400094790756,
+          "mass_proxy_unit": "mm³ (volume, no assumed density)",
+          "lattice_thickness_mm": 1.0,
+          "rim_height_mm": 4.0
+        },
+        "score": {
+          "value": 1.0738602026122956,
+          "components": {
+            "p95": 1.0736093263969109,
+            "maximum": 1.0885602907066732,
+            "std": 1.168663464691312,
+            "material": 1.0032731556965029,
+            "open_area": 1.0016637263853632
+          },
+          "weights": {
+            "p95": 0.35,
+            "maximum": 0.25,
+            "std": 0.15,
+            "material": 0.15,
+            "open_area": 0.1
+          },
+          "improvement_vs_original": {
+            "p95": -7.360932639691095,
+            "maximum": -8.856029070667326,
+            "std": -16.866346469131205,
+            "material_area_proxy": -0.32731556965029673
+          }
+        },
+        "validation": {
+          "vertex_count": 3791,
+          "face_count": 8058,
+          "body_count": 1,
+          "bounds": [
+            [
+              54.37548065185547,
+              71.12090301513672,
+              0.0
+            ],
+            [
+              127.66971588134766,
+              168.19387817382812,
+              4.0
+            ]
+          ],
+          "dimensions": [
+            73.29423522949219,
+            97.0729751586914,
+            4.0
+          ],
+          "watertight": true,
+          "volume": 3209.140009479077,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "winding_consistent": true,
+          "sha256": "e88c3693ffb7be0055e119eec5bde24940eb1fa762b373e321366e7b73d1cddc",
+          "source_unchanged": false,
+          "printable_geometry_checks_passed": true,
+          "missing_original_rim_volume": 4.074012849741848e-06,
+          "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+          "slice_contours": 123
+        },
+        "solver": {
+          "success": true,
+          "message": "`xtol` termination condition is satisfied.",
+          "nfev": 205,
+          "cost": 12.094201161084658,
+          "optimality": 84.27241424993416,
+          "parameters": {
+            "boundary_anchor": 2.0,
+            "interior_anchor": 0.0005,
+            "bending_weight": 0.01,
+            "max_nfev": 450,
+            "tolerance": 1e-07,
+            "load_steps": [
+              0.25,
+              0.5,
+              0.75,
+              1.0
+            ]
+          },
+          "stages": [
+            {
+              "progress": 0.25,
+              "success": true,
+              "nfev": 30,
+              "cost": 0.07742698046861703,
+              "optimality": 0.0028296654869864562
+            },
+            {
+              "progress": 0.5,
+              "success": true,
+              "nfev": 60,
+              "cost": 1.0438528785013887,
+              "optimality": 0.3683673081312685
+            },
+            {
+              "progress": 0.75,
+              "success": true,
+              "nfev": 45,
+              "cost": 4.597495859675689,
+              "optimality": 2.0382714592347577
+            },
+            {
+              "progress": 1.0,
+              "success": true,
+              "nfev": 70,
+              "cost": 12.094201161084658,
+              "optimality": 84.27241424993416
+            }
+          ]
+        },
+        "data": "data/designs/compliant/submerged.json",
+        "changed_edges": 19,
+        "nodes": 315,
+        "contacts": 20,
+        "stl": "downloads/compliant/Sub-Merged.stl"
+      },
+      "combined_score": 1.0108495725142261,
+      "combined_improvement_pct": -1.0849572514226136,
+      "zip": "downloads/lampform-compliant.zip"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "line_width_mm": 0.4,
+  "min_ligament_mm": 0.8,
+  "min_gap_mm": 0.4,
+  "lattice_height_mm": 1.0,
+  "rim_height_mm": 4.0,
+  "notes": "Conservative geometric defaults, not a printer profile. Two nominal extrusion widths per structural path. Gap probe applies to main cells; tapered corners and peripheral slots require slicer review. Source rim retained."
+}

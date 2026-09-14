@@ -2,208 +2,280 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const $ = id => document.getElementById(id);
-const format = n => n.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-const percent = n => `${format(n)}%`;
-const cache = new Map();
-let data, renderer, camera, controls, scene, lamp, tool, network, requestId = 0;
-let view = 'flat', amount = 1;
-const viewButtons = [...document.querySelectorAll('[data-view]')];
+const fmt = (n, digits = 1) => Number(n).toLocaleString('pt-BR', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c]);
 const palette = ['#45646f', '#7aaf83', '#d9b455', '#c65b34'].map(c => new THREE.Color(c));
+const fields = { demand:['Demanda de deformação', '%'], width:['Largura dos ligamentos', ' mm'], hole_size:['Abertura entre faces do hexágono', ' mm'], compliance:['Caminho / distância entre endpoints', '×'] };
+let catalog, part = 'hab2', view = 'flat', field = 'demand', revision = 0;
+let leftData, rightData, viewers = [], syncing = false;
+const cache = new Map();
 
-function demandColor(value) {
-  const t = THREE.MathUtils.clamp(value / 60, 0, 1) * (palette.length - 1);
-  const i = Math.min(Math.floor(t), palette.length - 2);
-  return palette[i].clone().lerp(palette[i + 1], t - i);
+function colorFor(value) {
+  const [lo, hi] = catalog.common_color_ranges[field];
+  const scaled = THREE.MathUtils.clamp((value - lo) / (hi - lo), 0, 1) * 3;
+  const i = Math.min(Math.floor(scaled), 2);
+  return palette[i].clone().lerp(palette[i + 1], scaled - i);
 }
 
-function initViewer() {
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor('#e8ebdf');
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
-  $('viewer').appendChild(renderer.domElement);
-  renderer.domElement.setAttribute('aria-hidden', 'true');
-  scene = new THREE.Scene();
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x67735c, 3));
-  const key = new THREE.DirectionalLight(0xffffff, 3.5);
-  key.position.set(-70, -80, 150); scene.add(key);
-  const fill = new THREE.DirectionalLight(0xf7ffdc, 2);
-  fill.position.set(60, 90, 70); scene.add(fill);
-  camera = new THREE.PerspectiveCamera(32, 1, .1, 2000);
-  camera.up.set(0, 0, 1);
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = .09;
-  controls.minDistance = 35; controls.maxDistance = 500;
-  controls.enablePan = true;
-  new ResizeObserver(() => {
-    const { width, height } = $('viewer').getBoundingClientRect();
-    if (!width || !height) return;
-    renderer.setSize(width, height);
-    camera.aspect = width / height; camera.updateProjectionMatrix();
-    render();
-  }).observe($('viewer'));
-  controls.addEventListener('change', render);
-  let inViewport = true;
-  new IntersectionObserver(([entry]) => { inViewport = entry.isIntersecting; }).observe($('viewer'));
-  renderer.setAnimationLoop(() => { if (inViewport && !document.hidden) controls.update(); });
-  renderer.domElement.addEventListener('webglcontextlost', event => {
-    event.preventDefault(); showError('O visualizador 3D foi interrompido. Recarregue a página para restaurá-lo.');
-  });
+function edgeValue(edge, dataset) {
+  if (field !== 'hole_size') return edge[field];
+  const x = (edge.flat[0] + edge.flat[3]) / 2, y = (edge.flat[1] + edge.flat[4]) / 2;
+  let nearest, distance = Infinity;
+  for (const cell of dataset.cells) {
+    const coords = cell.candidate.slice(0, -1);
+    const cx = coords.reduce((s, p) => s + p[0], 0) / coords.length;
+    const cy = coords.reduce((s, p) => s + p[1], 0) / coords.length;
+    const d = (x-cx)**2 + (y-cy)**2;
+    if (d < distance) { distance = d; nearest = cell; }
+  }
+  return nearest.hole_size;
 }
 
-function render() { if (renderer && scene && camera) renderer.render(scene, camera); }
-
-function mesh(source, material) {
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(source.positions, 3));
-  geometry.setIndex(source.indices);
-  geometry.computeVertexNormals();
-  return new THREE.Mesh(geometry, material);
-}
-
-function discard(object) {
-  if (!object) return;
-  scene.remove(object); object.geometry.dispose(); object.material.dispose();
-}
-
-function installGeometry() {
-  if (!renderer) return;
-  discard(lamp); discard(tool); discard(network);
-  lamp = mesh(data.lamp, new THREE.MeshStandardMaterial({ color: '#dbdfc9', roughness: .64, metalness: .05, side: THREE.DoubleSide }));
-  tool = mesh(data.tool, new THREE.MeshStandardMaterial({ color: '#6e7d67', roughness: .9, metalness: 0, transparent: true, opacity: .12, depthWrite: false, side: THREE.DoubleSide }));
-  network = new THREE.InstancedMesh(new THREE.CylinderGeometry(.25, .25, 1, 6), new THREE.MeshBasicMaterial({depthTest: false}), data.edges.length);
-  network.renderOrder = 2;
-  scene.add(lamp, tool, network);
-  updateGeometry(); resetCamera();
-}
-
-function resetCamera() {
-  if (!camera || !data) return;
-  const size = Math.max(...data.lamp.dimensions, ...data.tool.dimensions);
-  const distance = size * 1.85 * Math.max(1, 1 / camera.aspect);
-  camera.position.set(distance * .62, -distance * .75, distance * .72);
-  controls.target.set(0, 0, view === 'flat' ? 0 : 18);
-  controls.update(); render();
-}
-
-function updateGeometry() {
-  if (!data || !renderer) return;
-  lamp.visible = view === 'flat';
-  network.visible = view !== 'flat';
-  tool.visible = $('show-tool').checked;
-  const dummy = new THREE.Object3D();
-  const up = new THREE.Vector3(0, 1, 0);
-  data.edges.forEach((edge, i) => {
-    const color = view === 'demand' ? demandColor(edge.demand) : new THREE.Color('#415a37');
-    const p = edge.flat.map((v, j) => THREE.MathUtils.lerp(v, edge.formed[j], amount));
-    const start = new THREE.Vector3(...p.slice(0, 3));
-    const end = new THREE.Vector3(...p.slice(3));
-    const direction = end.clone().sub(start);
-    dummy.position.copy(start).add(end).multiplyScalar(.5);
-    dummy.quaternion.setFromUnitVectors(up, direction.clone().normalize());
-    dummy.scale.set(1, direction.length(), 1);
-    dummy.updateMatrix();
-    network.setMatrixAt(i, dummy.matrix);
-    network.setColorAt(i, color);
-  });
-  network.instanceMatrix.needsUpdate = true; network.instanceColor.needsUpdate = true;
-  network.computeBoundingSphere();
-  render();
-}
-
-function setView(next) {
-  view = next;
-  viewButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.view === view)));
-  $('forming-control').hidden = view === 'flat';
-  $('legend').hidden = view !== 'demand';
-  $('state-description').textContent = {
-    flat: 'O STL original da peça, antes da conformação.',
-    formed: 'Rede equivalente de ligamentos sobre a ferramenta, com a borda ancorada em 2,0.',
-    demand: 'Cores do resultado final da rede de referência. A escala não muda durante a interpolação.'
-  }[view];
-  $('show-tool').checked = view !== 'flat';
-  amount = 1; $('progress').value = '100'; $('progress-value').textContent = '100%';
-  updateModelLabel(); updateGeometry(); resetCamera();
-}
-
-function updateModelLabel() {
-  const name = $('piece').value === 'hab2_mold' ? 'HAB-2' : 'SUB-MERGED';
-  $('model-label').textContent = `${name} / ${ { flat: 'STL ORIGINAL', formed: 'REDE CONFORMADA', demand: 'DEMANDA V0.2' }[view] }`;
-}
-
-function fillMetrics() {
-  const metrics = data.summary.relaxed;
-  [['mean', 'mean_strain_pct'], ['p95', 'p95_strain_pct'], ['maximum', 'max_strain_pct']].forEach(([id, key]) => {
-    $(id).replaceChildren(document.createTextNode(format(metrics[key])));
-    const small = document.createElement('small'); small.textContent = '%'; $(id).append(small);
-  });
-  $('geometry-info').textContent = `${data.lamp.dimensions.map(format).join(' × ')} mm · ${data.summary.cells} células · ${data.summary.ligaments} ligamentos na rede`;
-  $('comparison-piece').textContent = data.summary.pair;
-  updateComparison();
-}
-
-function updateComparison() {
-  if (!data) return;
-  const anchor = Number($('anchor').value);
-  const row = data.sensitivity.find(item => item.boundary_anchor === anchor);
-  const baseline = data.summary.relaxed.p95_strain_pct;
-  const max = Math.max(...data.sensitivity.map(item => item.p95_strain_pct)) * 1.1;
-  $('base-bar-value').textContent = percent(baseline);
-  $('selected-bar-value').textContent = percent(row.p95_strain_pct);
-  $('base-bar').style.width = `${baseline / max * 100}%`;
-  $('selected-bar').style.width = `${row.p95_strain_pct / max * 100}%`;
-  $('selected-bar-label').textContent = `Selecionada · ${anchor.toLocaleString('pt-BR')}`;
-  const delta = (1 - row.p95_strain_pct / baseline) * 100;
-  $('comparison-insight').textContent = Math.abs(delta) < .01 ? 'A referência para comparar o efeito da borda.' : `${percent(Math.abs(delta))} ${delta > 0 ? 'menos' : 'mais'} demanda no P95, dentro deste modelo.`;
-}
-
-function showError(message) {
-  $('loading').hidden = false;
-  $('loading').textContent = message;
-}
-
-async function loadPiece() {
-  const id = ++requestId;
-  const slug = $('piece').value;
-  $('loading').hidden = false;
-  $('loading').textContent = 'Carregando os modelos reais…';
-  $('piece').setAttribute('aria-busy', 'true');
-  try {
-    if (!cache.has(slug)) {
-      const response = await fetch(`data/${slug}.json`);
-      if (!response.ok) throw new Error('Dados indisponíveis');
-      cache.set(slug, await response.json());
+class Viewer {
+  constructor(id) {
+    this.element = $(id);
+    this.renderer = new THREE.WebGLRenderer({ antialias:true });
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    this.renderer.setClearColor('#e8ebdf');
+    this.element.append(this.renderer.domElement);
+    this.renderer.domElement.setAttribute('aria-hidden','true');
+    this.scene = new THREE.Scene();
+    this.scene.add(new THREE.HemisphereLight(0xffffff, 0x87917e, 3));
+    const key = new THREE.DirectionalLight(0xffffff, 3); key.position.set(-100,-100,150); this.scene.add(key);
+    this.camera = new THREE.PerspectiveCamera(33, 1, .1, 2000); this.camera.up.set(0,0,1);
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.minDistance = 35; this.controls.maxDistance = 550;
+    this.controls.addEventListener('change', () => {
+      this.render();
+      if (syncing) return;
+      syncing = true;
+      for (const other of viewers) if (other !== this) {
+        other.camera.position.copy(this.camera.position);
+        other.controls.target.copy(this.controls.target);
+        other.controls.update(); other.render();
+      }
+      syncing = false;
+    });
+    new ResizeObserver(() => {
+      const {width,height} = this.element.getBoundingClientRect();
+      if (!width || !height) return;
+      this.renderer.setSize(width,height); this.camera.aspect = width/height; this.camera.updateProjectionMatrix();
+      this.render();
+    }).observe(this.element);
+    this.renderer.domElement.addEventListener('webglcontextlost', e => {
+      e.preventDefault(); $('app-status').hidden=false;
+      $('app-status').textContent='O 3D foi interrompido. Recarregue a página; as tabelas e os downloads continuam disponíveis.';
+    });
+  }
+  render() { this.renderer.render(this.scene,this.camera); }
+  clear() {
+    for (const object of this.objects || []) { this.scene.remove(object); object.geometry.dispose(); object.material.dispose(); }
+    this.objects=[];
+  }
+  mesh(source, material) {
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(source.positions,3));
+    geometry.setIndex(source.indices); geometry.computeVertexNormals();
+    return new THREE.Mesh(geometry, material);
+  }
+  setData(dataset) {
+    this.data=dataset; this.clear();
+    this.lamp=this.mesh(dataset.lamp, new THREE.MeshStandardMaterial({vertexColors:true,roughness:.8,side:THREE.DoubleSide}));
+    this.tool=this.mesh(dataset.tool, new THREE.MeshStandardMaterial({color:'#87917c',transparent:true,opacity:.10,depthWrite:false,side:THREE.DoubleSide}));
+    this.network=new THREE.InstancedMesh(new THREE.CylinderGeometry(.19,.19,1,6), new THREE.MeshBasicMaterial({depthTest:false}), dataset.edges.length);
+    this.network.renderOrder=2;
+    this.objects=[this.lamp,this.tool,this.network]; this.scene.add(...this.objects);
+    // Geometry-based nearest centerline association for the flat mesh's color.
+    // Reused across field changes; no solver result is recomputed in the browser.
+    const positions=dataset.lamp.positions;
+    this.closest=new Int32Array(positions.length/3);
+    for (let i=0; i<positions.length; i+=3) {
+      let best=Infinity, index=-1;
+      if (positions[i+2]>1.01) { this.closest[i/3]=-1; continue; }
+      dataset.edges.forEach((edge,j) => {
+        const p=edge.flat, dx=p[3]-p[0], dy=p[4]-p[1];
+        const t=THREE.MathUtils.clamp(((positions[i]-p[0])*dx+(positions[i+1]-p[1])*dy)/(dx*dx+dy*dy),0,1);
+        const d=(positions[i]-p[0]-t*dx)**2+(positions[i+1]-p[1]-t*dy)**2;
+        if(d<best){best=d;index=j;}
+      });
+      this.closest[i/3]=best<4 ? index : -1;
     }
-    if (id !== requestId) return;
-    data = cache.get(slug);
-    fillMetrics(); updateModelLabel(); installGeometry();
-    $('loading').hidden = Boolean(renderer);
-    if (!renderer) showError('O navegador não conseguiu iniciar o 3D. Os resultados e a história continuam disponíveis abaixo.');
-  } catch {
-    if (id !== requestId) return;
-    data = null;
-    if (lamp) lamp.visible = false;
-    if (tool) tool.visible = false;
-    if (network) network.visible = false;
-    ['mean', 'p95', 'maximum', 'base-bar-value', 'selected-bar-value'].forEach(key => $(key).textContent = '—');
-    $('geometry-info').textContent = 'Geometria indisponível.';
-    $('comparison-insight').textContent = 'Os dados desta peça não puderam ser carregados.';
-    render();
-    showError('Não foi possível carregar esta peça. Selecione-a novamente ou recarregue a página.');
-  } finally { if (id === requestId) $('piece').removeAttribute('aria-busy'); }
+    this.update();
+  }
+  update() {
+    if (!this.data) return;
+    const dataset=this.data;
+    this.lamp.visible=view==='flat'; this.tool.visible=view==='formed';
+    const colors=dataset.edges.map(edge=>colorFor(edgeValue(edge,dataset)));
+    const vertexColors=new Float32Array(this.closest.length*3);
+    const neutral=new THREE.Color('#c8d0ba');
+    this.closest.forEach((edge,i)=>(edge<0?neutral:colors[edge]).toArray(vertexColors,i*3));
+    this.lamp.geometry.setAttribute('color',new THREE.Float32BufferAttribute(vertexColors,3));
+    const dummy=new THREE.Object3D(), up=new THREE.Vector3(0,1,0);
+    dataset.edges.forEach((edge,i)=>{
+      const p=view==='flat'?edge.flat:edge.formed;
+      const a=new THREE.Vector3(...p.slice(0,3)), b=new THREE.Vector3(...p.slice(3));
+      if(view==='flat'){a.z=1.06;b.z=1.06;}
+      const direction=b.clone().sub(a);
+      dummy.position.copy(a).add(b).multiplyScalar(.5);
+      dummy.quaternion.setFromUnitVectors(up,direction.clone().normalize());
+      dummy.scale.set(1,direction.length(),1); dummy.updateMatrix();
+      this.network.setMatrixAt(i,dummy.matrix); this.network.setColorAt(i,colors[i]);
+    });
+    this.network.instanceMatrix.needsUpdate=true; this.network.instanceColor.needsUpdate=true;
+    this.network.computeBoundingSphere(); this.render();
+  }
+  reset() {
+    const distance=195*Math.max(1,.8/this.camera.aspect);
+    this.camera.position.set(distance*.62,-distance*.78,distance*.79);
+    this.controls.target.set(0,0,view==='flat'?0:18); this.controls.update();this.render();
+  }
 }
 
-try { initViewer(); } catch { renderer = null; }
-viewButtons.forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
-$('piece').addEventListener('change', loadPiece);
-$('anchor').addEventListener('change', updateComparison);
-$('show-tool').addEventListener('change', updateGeometry);
-$('reset-camera').addEventListener('click', resetCamera);
-$('progress').addEventListener('input', () => {
-  amount = Number($('progress').value) / 100;
-  $('progress-value').textContent = `${$('progress').value}%`;
-  updateGeometry();
-});
-await loadPiece();
+function selected(side) { return catalog.designs.find(d=>d.id===$(`compare-${side}`).value); }
+function cards() {
+  const selectedId=$('compare-right').value;
+  $('design-cards').innerHTML=catalog.designs.map(design=>{
+    const m=design[part].metrics;
+    const values=[['P95',`${fmt(m.p95)}%`],['Máximo',`${fmt(m.maximum)}%`],['Ligamentos >20%',`${fmt(m.above_20_pct)}%`],['Área aberta',`${fmt(m.open_area)}%`],['Material',`${fmt(m.material_area_proxy,0)} mm²`],['Score da peça',fmt(design[part].score.value,3)]];
+    return `<button class="design-card" data-design="${design.id}" aria-label="Selecionar ${esc(design.name)}" aria-pressed="${design.id===selectedId}"><span class="rank">${design.id===catalog.recommendation.candidate_id?'MELHOR ALTERNATIVA COMBINADA':design.id==='original'?'REFERÊNCIA':'CANDIDATO'}</span><h3>${esc(design.name)}</h3><dl>${values.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl><span class="combined">Score das duas peças: ${fmt(design.combined_score,3)}</span></button>`;
+  }).join('');
+}
+
+function table() {
+  const left=selected('left'),right=selected('right'),a=left[part],b=right[part];
+  $('metric-left').textContent=left.name; $('metric-right').textContent=right.name;
+  const rows=[['P95','p95','%',1],['Máximo','maximum','%',1],['Ligamentos acima de 20%','above_20_pct','%',1],['Material projetado','material_area_proxy',' mm²',1],['Área aberta','open_area','%',1],['Volume proxy','mass_proxy',' mm³',1],['Alimentação XY média','mean_xy_feed',' mm',2],['Score da peça','score','',3]];
+  $('metrics-body').innerHTML=rows.map(([label,key,unit,digits])=>{
+    const va=key==='score'?a.score.value:a.metrics[key],vb=key==='score'?b.score.value:b.metrics[key];
+    const delta=va ? (vb-va)/Math.abs(va)*100 : null;
+    return `<tr><td>${label}</td><td>${fmt(va,digits)}${unit}</td><td>${fmt(vb,digits)}${unit}</td><td>${delta===null?'—':`${delta>0?'+':''}${fmt(delta)}%`}</td></tr>`;
+  }).join('');
+  const details=[...['mean','p50','p90','p99','std'].map(key=>[({mean:'Média',std:'Desvio padrão'})[key]||key.toUpperCase(),a.metrics[key],b.metrics[key],'%']),
+    ...[5,10,30].map(q=>[`Ligamentos >${q}%`,a.metrics[`above_${q}_pct`],b.metrics[`above_${q}_pct`],'%']),
+    ['Alimentação XY máxima',a.metrics.max_xy_feed,b.metrics.max_xy_feed,' mm'],
+    ['Largura mínima nos caminhos',a.metrics.minimum_ligament_width,b.metrics.minimum_ligament_width,' mm'],
+    ['Nós / ligações ao aro',`${a.nodes} / ${a.contacts}`,`${b.nodes} / ${b.contacts}`,''],
+    ['Solver chegou à tolerância',a.solver.success?'Sim':'Não',b.solver.success?'Sim':'Não',''],
+    ['Critério de término',a.solver.message,b.solver.message,''],
+    ['Custo da energia proxy',a.solver.cost,b.solver.cost,''],
+    ['Optimality numérica (não física)',a.solver.optimality,b.solver.optimality,''],
+    ['STL watertight',a.validation.watertight?'Sim':'Não',b.validation.watertight?'Sim':'Não',''],
+    ['Corpos',String(a.validation.body_count),String(b.validation.body_count),''],
+    ['Faces',String(a.validation.face_count),String(b.validation.face_count),''],
+    ['Faces duplicadas',String(a.validation.duplicate_faces),String(b.validation.duplicate_faces),''],
+    ['Faces degeneradas',String(a.validation.degenerate_faces),String(b.validation.degenerate_faces),''],
+    ['Dimensões',a.validation.dimensions.map(x=>fmt(x,2)).join(' × '),b.validation.dimensions.map(x=>fmt(x,2)).join(' × '),' mm']];
+  $('detail-body').innerHTML=details.map(([label,va,vb,unit])=>`<tr><td>${label}</td><td>${esc(typeof va==='number'?fmt(va,3):va)}${unit}</td><td>${esc(typeof vb==='number'?fmt(vb,3):vb)}${unit}</td></tr>`).join('');
+  $('score-components').textContent=`Componentes do score à direita: ${Object.entries(b.score.components).map(([key,value])=>`${key} = ${fmt(value,3)}`).join(' · ')}.`;
+  $('original-note').hidden=left.id!=='original'&&right.id!=='original';
+}
+
+function heatmap(dataset,side) {
+  const lines=dataset.edges.map(edge=>{
+    const p=edge.flat, color=colorFor(edgeValue(edge,dataset)).getStyle();
+    return `<path d="M${p[0]},${-p[1]} L${p[3]},${-p[4]}" stroke="${color}" stroke-width="${Math.min(edge.width,.9)}" stroke-linecap="round"/>`;
+  }).join('');
+  const holes=field==='hole_size'?dataset.cells.map(cell=>`<polygon points="${cell.candidate.map(p=>`${p[0]},${-p[1]}`).join(' ')}" fill="none" stroke="${colorFor(cell.hole_size).getStyle()}" stroke-width=".4"/>`).join(''):'';
+  $(`heatmap-${side}`).innerHTML=`<svg viewBox="-42 -54 84 110" role="img" aria-label="Mapa plano de ${esc(selected(side).name)}: ${esc(fields[field][0])}"><path d="${esc(dataset.footprint_svg)}" fill="#cad2bf" fill-rule="evenodd"/>${lines}${holes}</svg>`;
+  $(`heatmap-label-${side}`).textContent=`${selected(side).name} · ${fields[field][0]}`;
+}
+
+function inspectCell() {
+  if(!rightData) return;
+  const cell=rightData.cells[Number($('cell').value)||0];
+  const centered=coords=>{
+    const pts=coords.slice(0,-1),x=pts.reduce((s,p)=>s+p[0],0)/pts.length,y=pts.reduce((s,p)=>s+p[1],0)/pts.length;
+    return pts.map(p=>`${p[0]-x},${-(p[1]-y)}`).join(' ');
+  };
+  $('cell-preview').innerHTML=`<svg viewBox="-12 -6 24 12" role="img" aria-label="Furo original e furo do design selecionado, na mesma escala"><g transform="translate(-6,0)"><polygon points="${centered(cell.original)}" fill="none" stroke="#657456" stroke-width=".18"/></g><g transform="translate(6,0)"><polygon points="${centered(cell.candidate)}" fill="#d9ef86" stroke="#657456" stroke-width=".18"/></g><text x="-6" y="5.5" text-anchor="middle" font-size=".8">Original</text><text x="6" y="5.5" text-anchor="middle" font-size=".8">Selecionado</text></svg>`;
+  const rows=[['Furo original',`${fmt(cell.original_hole_size,2)} mm`],['Furo selecionado',`${fmt(cell.hole_size,2)} mm`],['Ligamento médio original',`${fmt(cell.original_ligament_width,2)} mm`],['Ligamento médio selecionado',`${fmt(cell.ligament_width,2)} mm`],['Variação da largura',`${fmt((cell.ligament_width/cell.original_ligament_width-1)*100)}%`],['Demanda baseline da célula',`${fmt(cell.baseline_demand)}%`]];
+  $('cell-values').innerHTML=rows.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('');
+}
+
+function selectionInfo() {
+  const design=selected('right');
+  const explanations={original:'A geometria fornecida permanece intacta. Nesta versão, a rede de referência é recalculada com larguras medidas e ligações explícitas ao aro.',gradient:'Os centros dos furos e o pitch foram mantidos. O campo de demanda do baseline orienta uma redução suave de até 10% na abertura, aumentando a largura dos ligamentos.',gradient_boundary:'O núcleo do gradiente foi reduzido a 90% para abrir espaço às pontes em S de 0,95 mm junto ao aro. O pitch interno passa a 7,2 mm. As pontes aparecem no STL e entram no cálculo, inclusive seus picos.',compliant:`${design[part].changed_edges} ligamentos interiores críticos desta peça receberam um caminho em S, com largura de 0,95 mm. O solver considera seu comprimento e suas mudanças de direção.`};
+  $('design-explanation').textContent=explanations[design.id];
+  $('download-title').textContent=design.name;
+  $('download-description').textContent=`Score combinado ${fmt(design.combined_score,3)}. ${design.id==='original'?'Arquivos originais preservados; exigem revisão no slicer.':'Dois sólidos fechados, de corpo único, sem faces duplicadas ou degeneradas na validação.'}`;
+  $('download-zip').href=design.zip; $('download-hab2').href=design.hab2.stl; $('download-submerged').href=design.submerged.stl;
+  $('download-metrics').href=`downloads/${design.id.replaceAll('_','-')}/metrics.json`;
+  inspectCell();
+}
+
+function updateField() {
+  const [lo,hi]=catalog.common_color_ranges[field];
+  $('legend-title').textContent=fields[field][0];
+  $('legend-low').textContent=fmt(lo)+fields[field][1];
+  $('legend-high').textContent=fmt(hi)+fields[field][1]+'+';
+  viewers.forEach(viewer=>viewer.update());
+  if(leftData)heatmap(leftData,'left'); if(rightData)heatmap(rightData,'right');
+}
+
+async function fetchData(design) {
+  const path=design[part].data;
+  if(!cache.has(path)){
+    const response=await fetch(path); if(!response.ok)throw new Error('Falha ao carregar o design');
+    cache.set(path,await response.json());
+  }
+  return cache.get(path);
+}
+
+async function refresh() {
+  const ticket=++revision;
+  $('app-status').hidden=false; $('app-status').textContent='Carregando as geometrias selecionadas…';
+  try {
+    const [a,b]=await Promise.all([fetchData(selected('left')),fetchData(selected('right'))]);
+    if(ticket!==revision)return;
+    leftData=a;rightData=b;
+    cards();table();selectionInfo();
+    viewers[0]?.setData(a);viewers[1]?.setData(b);viewers.forEach(v=>v.reset());
+    $('caption-left').textContent=`${part==='hab2'?'HAB-2 → Mold':'Sub-Merged → Push'} · ${a.parent_count} caminhos`;
+    $('caption-right').textContent=`${part==='hab2'?'HAB-2 → Mold':'Sub-Merged → Push'} · ${b.parent_count} caminhos`;
+    updateField(); $('app-status').hidden=viewers.length===2;
+    if(viewers.length!==2)$('app-status').textContent='O 3D não está disponível neste navegador. Use os mapas planos, as tabelas e os downloads abaixo.';
+  } catch(error) {
+    if(ticket!==revision)return;
+    viewers.forEach(v=>v.clear());leftData=null;rightData=null;
+    $('app-status').textContent='Não foi possível carregar a comparação. Recarregue a página para tentar novamente.';
+    ['download-zip','download-hab2','download-submerged','download-metrics'].forEach(id=>$(id).removeAttribute('href'));
+    console.error(error);
+  }
+}
+
+async function main() {
+  try {
+    const response=await fetch('data/designs.json'); if(!response.ok)throw new Error('Catálogo indisponível');
+    catalog=await response.json();
+    for(const side of ['left','right']){
+      $(`compare-${side}`).innerHTML=catalog.designs.map(d=>`<option value="${d.id}">${esc(d.name)}</option>`).join('');
+      $(`compare-${side}`).addEventListener('change',refresh);
+    }
+    $('compare-right').value=catalog.recommendation.candidate_id;
+    $('recommendation-text').textContent=catalog.recommendation.reason;
+    $('cell').innerHTML=Array.from({length:65},(_,i)=>`<option value="${i}">${i+1}</option>`).join('');
+    $('cell').addEventListener('change',inspectCell);
+    $('design-cards').addEventListener('click',event=>{
+      const button=event.target.closest('[data-design]');if(!button)return;
+      $('compare-right').value=button.dataset.design;refresh();
+    });
+    document.querySelectorAll('[data-part]').forEach(button=>button.addEventListener('click',()=>{
+      part=button.dataset.part;
+      document.querySelectorAll('[data-part]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+      refresh();
+    }));
+    document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{
+      view=button.dataset.view;document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+      $('view-note').textContent=view==='flat'?'Geometria dos STL planos, com o campo calculado sobreposto. O aro permanece neutro.':'Rede equivalente de caminhos materiais sobre a ferramenta. A forma é prevista pelo solver; não é um STL sólido deformado nem uma simulação calibrada do polímero.';
+      viewers.forEach(v=>{v.update();v.reset();});
+    }));
+    $('field').addEventListener('change',()=>{field=$('field').value;updateField();});
+    $('reset-camera').addEventListener('click',()=>viewers.forEach(v=>v.reset()));
+    try { viewers=[new Viewer('viewer-left'),new Viewer('viewer-right')]; } catch { viewers=[]; }
+    await refresh();
+  } catch(error) {
+    $('app-status').textContent='Os resultados não puderam ser carregados. Recarregue a página.';console.error(error);
+  }
+}
+await main();

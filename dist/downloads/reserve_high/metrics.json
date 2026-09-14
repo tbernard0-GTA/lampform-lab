@@ -1,0 +1,348 @@
+{
+  "hab2": {
+    "metrics": {
+      "p50": 20.053566465098207,
+      "p90": 28.029366275341303,
+      "p95": 29.613266580688062,
+      "p99": 34.932513526155255,
+      "mean": 18.611240055883734,
+      "maximum": 36.97890215364741,
+      "std": 8.31795465257602,
+      "mean_xy_feed": 3.1265264592552633,
+      "max_xy_feed": 10.417781794739742,
+      "critical_edges": 10,
+      "edge_count": 246,
+      "above_5_pct": 92.6829268292683,
+      "above_10_pct": 82.92682926829268,
+      "above_20_pct": 50.0,
+      "above_30_pct": 4.0650406504065035,
+      "open_area": 59.31112024118543,
+      "open_area_mm2": 2928.561143416433,
+      "material_area_proxy": 2009.0646028308117,
+      "minimum_ligament_width": 1.071984360386054,
+      "mass_proxy": 3547.904475697797,
+      "mass_proxy_unit": "mm³ (rim volume + flat material area × thickness; no density)",
+      "lattice_thickness_mm": 1.0,
+      "rim_height_mm": 4.0,
+      "high_edges": 123,
+      "critical_fraction": 0.04065040650406504,
+      "critical_pct": 4.0650406504065035,
+      "top10_mean": 33.65071077888099,
+      "risk_index": 0.627852809914859,
+      "risk_components": {
+        "p95": 0.8229586639808898,
+        "p99": 0.7712912107416655,
+        "maximum": 0.5747918543629252,
+        "critical_fraction": 0.2222222222222222
+      },
+      "geometry_change_pct": 24.121204869389803,
+      "material_change_pct": 20.739325426006783,
+      "critical_cells": 4
+    },
+    "score": {
+      "value": 0.8390467169213897,
+      "components": {
+        "p95": 0.8229586639808898,
+        "maximum": 0.5747918543629252,
+        "std": 0.7710842069552524,
+        "material": 1.2073932542600678,
+        "open_area": 1.1054160175504888
+      },
+      "weights": {
+        "p95": 0.35,
+        "maximum": 0.25,
+        "std": 0.15,
+        "material": 0.15,
+        "open_area": 0.1
+      },
+      "improvement_vs_original": {
+        "p95": 17.704133601911025,
+        "maximum": 42.520814563707475,
+        "std": 22.891579304474764,
+        "material_area_proxy": -20.739325426006776
+      }
+    },
+    "validation": {
+      "vertex_count": 2717,
+      "face_count": 5910,
+      "body_count": 1,
+      "bounds": [
+        [
+          128.33029174804688,
+          87.80611419677734,
+          0.0
+        ],
+        [
+          201.62451171875,
+          184.87908935546875,
+          4.0
+        ]
+      ],
+      "dimensions": [
+        73.29421997070312,
+        97.0729751586914,
+        4.0
+      ],
+      "watertight": true,
+      "volume": 3547.9667780253744,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "winding_consistent": true,
+      "sha256": "af85dccee00bfc908a1fa523d266c7526ace2bba8ff1c852429927712bb9e110",
+      "source_unchanged": false,
+      "printable_geometry_checks_passed": true,
+      "missing_original_rim_volume": 2.201446325974151e-07,
+      "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+      "slice_contours": 123,
+      "bounds_valid": true,
+      "aperture_probe_passed": true,
+      "min_feature_scope": "0.8 mm swept structural paths; 0.4 mm probe in main cells; not every tapered corner"
+    },
+    "gate": {
+      "passed": true,
+      "checks": {
+        "p95": true,
+        "critical_edges": true,
+        "maximum": true,
+        "watertight": true,
+        "single_body": true,
+        "geometry": true,
+        "bounds": true,
+        "min_ligament": true,
+        "aperture_probe": true,
+        "solver_converged": true
+      },
+      "reasons": [],
+      "status": "PASS"
+    },
+    "solver": {
+      "success": true,
+      "message": "`xtol` termination condition is satisfied.",
+      "nfev": 143,
+      "cost": 9.40140125005031,
+      "optimality": 2.667505910552465,
+      "parameters": {
+        "boundary_anchor": 2.0,
+        "interior_anchor": 0.0005,
+        "bending_weight": 0.01,
+        "max_nfev": 450,
+        "tolerance": 1e-07,
+        "load_steps": [
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ]
+      },
+      "stages": [
+        {
+          "progress": 0.25,
+          "success": true,
+          "nfev": 16,
+          "cost": 0.11051572576320905,
+          "optimality": 0.00015994333532800767
+        },
+        {
+          "progress": 0.5,
+          "success": true,
+          "nfev": 34,
+          "cost": 1.4579238960160563,
+          "optimality": 0.09004657539203559
+        },
+        {
+          "progress": 0.75,
+          "success": true,
+          "nfev": 45,
+          "cost": 4.995043638882207,
+          "optimality": 0.13684084685210732
+        },
+        {
+          "progress": 1.0,
+          "success": true,
+          "nfev": 48,
+          "cost": 9.40140125005031,
+          "optimality": 2.667505910552465
+        }
+      ]
+    },
+    "data": "data/workbench/reserve_high/hab2.json",
+    "stl": "downloads/reserve_high/HAB-2.stl",
+    "why": "Reserve High: abertura equivalente média 6.47 mm; material projetado +20.7%; geometria plana alterada 24.1%. P95 36.0 → 29.6%; P99 45.3 → 34.9%; pico 64.3 → 37.0%; críticos 45 → 10. Gates: PASS.",
+    "nodes": 182,
+    "contacts": 20
+  },
+  "submerged": {
+    "metrics": {
+      "p50": 26.64715415057668,
+      "p90": 44.39626012981445,
+      "p95": 51.443475574547975,
+      "p99": 97.612624616376,
+      "mean": 28.721615941115683,
+      "maximum": 107.79724689346577,
+      "std": 16.43696468868256,
+      "mean_xy_feed": 2.2827894247007197,
+      "max_xy_feed": 5.44449489145342,
+      "critical_edges": 88,
+      "edge_count": 246,
+      "above_5_pct": 95.9349593495935,
+      "above_10_pct": 90.2439024390244,
+      "above_20_pct": 78.45528455284553,
+      "above_30_pct": 35.77235772357724,
+      "open_area": 61.41564611747521,
+      "open_area_mm2": 3032.4876777421496,
+      "material_area_proxy": 1905.1591100839341,
+      "minimum_ligament_width": 1.071990153695043,
+      "mass_proxy": 3444.800898220139,
+      "mass_proxy_unit": "mm³ (rim volume + flat material area × thickness; no density)",
+      "lattice_thickness_mm": 1.0,
+      "rim_height_mm": 4.0,
+      "high_edges": 193,
+      "critical_fraction": 0.35772357723577236,
+      "critical_pct": 35.77235772357724,
+      "top10_mean": 86.69658024095223,
+      "risk_index": 1.127173092518313,
+      "risk_components": {
+        "p95": 0.9273347610417956,
+        "p99": 1.3920055167723442,
+        "maximum": 1.2855177931119777,
+        "critical_fraction": 0.8979591836734694
+      },
+      "geometry_change_pct": 18.34469989161868,
+      "material_change_pct": 14.493829633798082,
+      "critical_cells": 50
+    },
+    "score": {
+      "value": 1.0913014341842908,
+      "components": {
+        "p95": 0.9273347610417956,
+        "maximum": 1.2855177931119777,
+        "std": 1.1083129606325965,
+        "material": 1.1449382963379808,
+        "open_area": 1.0736713099608133
+      },
+      "weights": {
+        "p95": 0.35,
+        "maximum": 0.25,
+        "std": 0.15,
+        "material": 0.15,
+        "open_area": 0.1
+      },
+      "improvement_vs_original": {
+        "p95": 7.266523895820444,
+        "maximum": -28.551779311197762,
+        "std": -10.831296063259654,
+        "material_area_proxy": -14.493829633798088
+      }
+    },
+    "validation": {
+      "vertex_count": 2730,
+      "face_count": 5936,
+      "body_count": 1,
+      "bounds": [
+        [
+          54.37548065185547,
+          71.12090301513672,
+          0.0
+        ],
+        [
+          127.66971588134766,
+          168.19387817382812,
+          4.0
+        ]
+      ],
+      "dimensions": [
+        73.29423522949219,
+        97.0729751586914,
+        4.0
+      ],
+      "watertight": true,
+      "volume": 3444.8661051739214,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "winding_consistent": true,
+      "sha256": "ebc7cfb418725b0c809e557df0237f43570ec91e21528f02e8d97c43b422bb40",
+      "source_unchanged": false,
+      "printable_geometry_checks_passed": true,
+      "missing_original_rim_volume": 4.074012849741848e-06,
+      "construction": "valid planar footprint extrusion + manifold union with exact source rim",
+      "slice_contours": 123,
+      "bounds_valid": true,
+      "aperture_probe_passed": true,
+      "min_feature_scope": "0.8 mm swept structural paths; 0.4 mm probe in main cells; not every tapered corner"
+    },
+    "gate": {
+      "passed": false,
+      "checks": {
+        "p95": true,
+        "critical_edges": true,
+        "maximum": false,
+        "watertight": true,
+        "single_body": true,
+        "geometry": true,
+        "bounds": true,
+        "min_ligament": true,
+        "aperture_probe": true,
+        "solver_converged": true
+      },
+      "reasons": [
+        "maximum"
+      ],
+      "status": "TRADE-OFF"
+    },
+    "solver": {
+      "success": true,
+      "message": "`xtol` termination condition is satisfied.",
+      "nfev": 151,
+      "cost": 15.507657508075054,
+      "optimality": 12.689904552997087,
+      "parameters": {
+        "boundary_anchor": 2.0,
+        "interior_anchor": 0.0005,
+        "bending_weight": 0.01,
+        "max_nfev": 450,
+        "tolerance": 1e-07,
+        "load_steps": [
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ]
+      },
+      "stages": [
+        {
+          "progress": 0.25,
+          "success": true,
+          "nfev": 17,
+          "cost": 0.12497991170604132,
+          "optimality": 0.000326911861449574
+        },
+        {
+          "progress": 0.5,
+          "success": true,
+          "nfev": 45,
+          "cost": 1.5140629328184092,
+          "optimality": 0.28670932895664053
+        },
+        {
+          "progress": 0.75,
+          "success": true,
+          "nfev": 25,
+          "cost": 6.1426057898664626,
+          "optimality": 5.2211047661582715
+        },
+        {
+          "progress": 1.0,
+          "success": true,
+          "nfev": 64,
+          "cost": 15.507657508075054,
+          "optimality": 12.689904552997087
+        }
+      ]
+    },
+    "data": "data/workbench/reserve_high/submerged.json",
+    "stl": "downloads/reserve_high/Sub-Merged.stl",
+    "why": "Reserve High: abertura equivalente média 6.61 mm; material projetado +14.5%; geometria plana alterada 18.3%. P95 55.5 → 51.4%; P99 70.1 → 97.6%; pico 83.9 → 107.8%; críticos 98 → 88. Gates: TRADE-OFF.",
+    "nodes": 182,
+    "contacts": 20
+  }
+}

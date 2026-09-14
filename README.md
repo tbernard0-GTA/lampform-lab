@@ -1,73 +1,56 @@
-# LampForm Lab
+# LampForm Lab — Engineering Workbench v0.5
 
-**Do plano à forma: uma demonstração da pesquisa de uma luminária termoformada.**
+[Aplicação pública](https://lampform-lab.oieszc.chatgpt.site) · [Relatório de engenharia](docs/LAMPFORM_V05_ENGINEERING_REPORT.md)
 
-[Abrir a demonstração pública](https://lampform-lab.oieszc.chatgpt.site)
+Uma bancada visual para investigar uma luminária impressa plana e termoformada. Compare Original e candidatos reais, localize concentração de demanda, veja mudanças geométricas, diferenças e alimentação XY, e baixe o STL exato.
 
-Uma página em português para contar a história do projeto e explorar seus modelos reais. O público pode consultar o estudo; a manutenção e as alterações do repositório são feitas pelo autor, **Thiago Bernardo**.
+## Uso
 
-## O que explorar
+Abra o site e selecione HAB-2 ou Sub-Merged, família e intensidade. Os dois viewers compartilham câmera e escala de cores. O mapa plano permite inspecionar células, sobrepor geometrias, mostrar apenas alterações, examinar delta e vetores XY. Danger zones, matriz ordenável e gráficos separam risco de custo de fabricação. Story / About conta o contexto.
 
-- Os quatro STL originais: HAB-2, Mold, Sub-merged body e Push.
-- A peça plana, a rede equivalente conformada e o mapa de demanda dos ligamentos.
-- A transição didática entre rede plana e conformada.
-- As métricas da v0.2 e a influência da ancoragem da borda nas duas peças.
-- A história: geometria original → rede de centros → rede de ligamentos → validação experimental.
+Os resultados são calculados offline. O site não executa Python, não recebe uploads e não oferece edição pública. O repositório é público; modificações no repositório principal dependem do proprietário. A visibilidade pública permite leitura e forks conforme as regras do GitHub; não concede acesso de escrita.
 
-Os seletores alteram somente a visualização no navegador. Não há cadastro, gravação de dados, edição compartilhada ou execução de cálculos no servidor.
+## Gerar novamente
 
-## Abrir localmente
+Requisitos: Python 3.13+ e Node.js 22+. Dependências científicas fixadas em requirements-analysis.txt.
 
-Instale [Node.js](https://nodejs.org/) 22 ou superior. Depois, dê dois cliques em **PLAY-LAMPFORM-LAB.cmd** ou execute:
+No Windows: execute BUILD-LAMPFORM-LAB.cmd. Depois use PLAY-LAMPFORM-LAB.cmd para abrir localmente.
 
 ```powershell
-.\run.ps1
-```
-
-Abra http://localhost:4173. A demonstração já inclui os dados e o JavaScript compilado, portanto não precisa instalar Python nem dependências para consultar. Feche o terminal para encerrar o servidor.
-
-## Editar a apresentação
-
-```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-analysis.txt
 npm ci
+.\.venv\Scripts\python.exe analysis/build_design_space.py
 npm run build
 npm test
 npm start
 ```
 
-- `dist/index.html`: conteúdo e história.
-- `dist/styles.css`: aparência e responsividade.
-- `web/app.js`: visualizador Three.js e controles.
-- `dist/data/`: cópia de apresentação dos modelos e resultados.
-- `scripts/prepare_data.py`: gera os dados da apresentação a partir dos arquivos originais, com a biblioteca padrão do Python.
-- `legacy/lampform_lab_v01/`: conteúdo integral do ZIP fornecido, preservado sem alterações.
+Com o ambiente Python ativado, o comando principal é `python analysis/build_design_space.py`. A pipeline anterior permanece disponível em `python analysis/run_design_sweep.py` e gera o catálogo v0.4 separado.
 
-Após alterar os dados originais intencionalmente, execute `python scripts/prepare_data.py` e `npm test`. A apresentação é estática; o conteúdo de `dist/` pode ser hospedado em um servidor de arquivos. As fontes usam Google Fonts, com fontes locais de fallback. Os modelos e o código do visualizador são servidos pelo próprio app.
+O modo opcional `--reuse-solutions` reaproveita soluções somente se coordenadas, arestas, larguras, comprimentos, ancoragens, parent IDs, parâmetros do solver e hash do STL coincidirem. O modo padrão recalcula tudo.
 
-## Como interpretar
+## Modelo e gates
 
-Os valores medem **demanda geométrica/estrutural de deformação**. Não são deformações reais calibradas do polímero, tensão de von Mises ou FEA termomecânico completo. A posição intermediária do slider é uma interpolação visual; as cores mostram sempre o resultado final de referência.
+Dez designs iniciais: Original e três intensidades de Reserve, Boundary e Hybrid. Se nenhum par passar, até três perturbações adicionais de Reserve são testadas. Cada tentativa fica em generated/sweep/. Sem ML e sem métricas interpoladas.
 
-| Referência v0.2, ancoragem 2,0 | HAB-2 → Mold | Sub-merged → Push |
-| --- | ---: | ---: |
-| Células | 65 | 65 |
-| Nós / ligamentos | 173 / 234 | 173 / 234 |
-| Demanda média | 20,26% | 20,77% |
-| P95 | 32,85% | 34,63% |
-| Máxima | 53,23% | 51,75% |
+Risco: 30% P95 + 25% P99 + 25% máximo + 20% fração crítica, normalizados ao Original. Material e área aberta ficam separados. Print gate: P95 menor, menos ligamentos acima de 30%, pico no máximo +5 pontos percentuais, solução convergida e geometria válida. A recomendação exige aprovação das DUAS peças. Nenhum vencedor é inventado se a busca terminar sem aprovação.
 
-Fonte: `legacy/lampform_lab_v01/results_v02/summary_v02.json`. A análise de borda consulta os seis resultados registrados nos CSV. Selecionar outra ancoragem não recalcula o modelo nem muda a rede 3D de referência.
+## Arquivos
 
-## Escopo desta demonstração
+- legacy/: material original preservado, incluindo os quatro STL e os scripts v0.1/v0.2.
+- analysis/: geometria, rede estrutural, solver, geração, gates, exportação e relatórios.
+- config/manufacturing.yaml: defaults de fabricação (JSON compatível com YAML 1.2).
+- generated/baseline_reproduction.json: comparação da reprodução dos scripts originais.
+- generated/sweep/: resultados, parâmetros, redes e CSV de todas as tentativas.
+- dist/data/results.json: catálogo completo v0.5.
+- dist/downloads/: STL e ZIP reais, métricas, parâmetros e instruções.
+- web/: fonte do app estático; dist/: versão compilada publicada.
 
-A apresentação utiliza os resultados já fornecidos. Os scripts de pesquisa foram preservados, mas não foram reexecutados para publicar esta demonstração. Os testes conferem a integridade da exportação, as métricas e os comprimentos da rede registrada.
+## Limites
 
-O estudo contém uma proposta heurística de gradiente em SVG, ainda sem candidatos STL finais validados. Um gerador de alternativas, otimização de preenchimentos e exportação de novos sólidos pertencem à próxima fase. A interface não apresenta esses recursos como concluídos.
+É um modelo de demanda geométrica/estrutural relativa, não FEA termomecânico calibrado. Não prevê temperatura, E(T), viscoelasticidade, atrito, anisotropia ou ruptura real. A vista formada é a rede analítica nas etapas calculadas; o STL exato é mostrado plano.
 
-Para reproduzir a pesquisa, veja o README original em `legacy/lampform_lab_v01/README.md`; ele lista as dependências e os scripts das versões 0.1 e 0.2. Execute esses scripts em uma cópia se quiser manter os resultados arquivados intactos.
+Os STL originais das lâmpadas têm faces duplicadas e não são watertight; são preservados sem reparos. Os candidatos são novos sólidos fechados e mantêm o aro original. Mold e Push nunca são alterados. Os checks de largura cobrem caminhos estruturais e a sonda de abertura cobre células principais; cantos e vãos periféricos devem ser revistos no slicer.
 
-## Consulta pública
-
-Este repositório é uma vitrine pública do estudo e é mantido pelo autor. Não foram adicionados colaboradores com escrita. Ser público permite visualizar, baixar e criar forks; isso não concede permissão para alterar este repositório. Não foi adicionada uma licença de código aberto nesta publicação.
-
-O Three.js utilizado pela demonstração é distribuído sob licença MIT; os avisos de terceiros são preservados em `dist/THIRD_PARTY_NOTICES.txt`.
+Consulte o relatório para resultados, rejeições, alcance da validação e recomendação física (ou ausência dela).
