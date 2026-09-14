@@ -1,0 +1,16 @@
+{
+  "id": "both_budget20",
+  "name": "Width + height · budget 20%",
+  "topology": "honeycomb",
+  "pitch_mm": 8.0,
+  "base_width_mm": 1.0,
+  "base_height_mm": 1.0,
+  "orientation_deg": 0.0,
+  "adaptation": "adaptive",
+  "response": "reinforce",
+  "width_response": 1.0,
+  "height_response": 1.0,
+  "material_budget_pct": 20.0,
+  "equal_material": false,
+  "target_lattice_volume_mm3": 1212.249667626001
+}

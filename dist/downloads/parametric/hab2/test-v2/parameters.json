@@ -1,0 +1,189 @@
+{
+  "A_uniform": {
+    "parameters": {
+      "id": "A_uniform",
+      "name": "A · Uniform",
+      "topology": "honeycomb",
+      "pitch_mm": 8.0,
+      "base_width_mm": 1.0,
+      "base_height_mm": 1.0,
+      "orientation_deg": 0.0,
+      "adaptation": "uniform",
+      "response": "reinforce",
+      "width_response": 0.0,
+      "height_response": 0.0,
+      "material_budget_pct": 0.0,
+      "equal_material": false,
+      "target_lattice_volume_mm3": 1010.2477276000002
+    },
+    "validation": {
+      "watertight": true,
+      "single_body": true,
+      "finite": true,
+      "duplicate_faces": 0,
+      "degenerate_faces": 0,
+      "bounds": [
+        [
+          128.33029174804688,
+          87.80611419677734,
+          0.0
+        ],
+        [
+          201.62451171875,
+          184.87908935546875,
+          4.0
+        ]
+      ],
+      "volume_mm3": 3098.763530573467,
+      "sha256": "75a5ce1f1b6fdd216e834c9426be733dd0cce4ca2ea9f5c1adc4925b81f7cdf9",
+      "layer_quantum_mm": 0.1,
+      "levels_mm": [
+        1.0
+      ],
+      "bounds_preserved": true,
+      "valid": true,
+      "missing_rim_mm3": 2.2597135360532167e-05
+    }
+  },
+  "B_width": {
+    "parameters": {
+      "id": "B_width",
+      "name": "B · Width adaptive",
+      "topology": "honeycomb",
+      "pitch_mm": 8.0,
+      "base_width_mm": 1.0,
+      "base_height_mm": 1.0,
+      "orientation_deg": 0.0,
+      "adaptation": "adaptive",
+      "response": "reinforce",
+      "width_response": 1.0,
+      "height_response": 0.0,
+      "material_budget_pct": 10.0,
+      "equal_material": false,
+      "target_lattice_volume_mm3": 1111.2725003600003
+    },
+    "validation": {
+      "watertight": true,
+      "single_body": true,
+      "finite": true,
+      "duplicate_faces": 0,
+      "degenerate_faces": 0,
+      "bounds": [
+        [
+          128.33029174804688,
+          87.80611419677734,
+          0.0
+        ],
+        [
+          201.62451171875,
+          184.87908935546875,
+          4.0
+        ]
+      ],
+      "volume_mm3": 3199.783592120572,
+      "sha256": "a2e6d81d105b1022d6b063ed1dde8a9cbd38cabc555a72d368522d716f3a7adf",
+      "layer_quantum_mm": 0.1,
+      "levels_mm": [
+        1.0
+      ],
+      "bounds_preserved": true,
+      "valid": true,
+      "missing_rim_mm3": 1.7642616019960162e-05
+    }
+  },
+  "C_height": {
+    "parameters": {
+      "id": "C_height",
+      "name": "C · Height adaptive",
+      "topology": "honeycomb",
+      "pitch_mm": 8.0,
+      "base_width_mm": 1.0,
+      "base_height_mm": 1.0,
+      "orientation_deg": 0.0,
+      "adaptation": "adaptive",
+      "response": "reinforce",
+      "width_response": 0.0,
+      "height_response": 1.0,
+      "material_budget_pct": 10.0,
+      "equal_material": false,
+      "target_lattice_volume_mm3": 1111.2725003600003
+    },
+    "validation": {
+      "watertight": true,
+      "single_body": true,
+      "finite": true,
+      "duplicate_faces": 0,
+      "degenerate_faces": 0,
+      "bounds": [
+        [
+          128.33029174804688,
+          87.80611419677734,
+          0.0
+        ],
+        [
+          201.62451171875,
+          184.87908935546875,
+          4.0
+        ]
+      ],
+      "volume_mm3": 3199.66550435096,
+      "sha256": "f291ff77467ff558dc9640a900050ced45a3478e46280db1f5b4fe5ed973436d",
+      "layer_quantum_mm": 0.1,
+      "levels_mm": [
+        1.0,
+        1.1,
+        1.2
+      ],
+      "bounds_preserved": true,
+      "valid": true,
+      "missing_rim_mm3": 1.9141528279457514e-05
+    }
+  },
+  "D_both": {
+    "parameters": {
+      "id": "D_both",
+      "name": "D · Width + height",
+      "topology": "honeycomb",
+      "pitch_mm": 8.0,
+      "base_width_mm": 1.0,
+      "base_height_mm": 1.0,
+      "orientation_deg": 0.0,
+      "adaptation": "adaptive",
+      "response": "reinforce",
+      "width_response": 1.0,
+      "height_response": 1.0,
+      "material_budget_pct": 10.0,
+      "equal_material": false,
+      "target_lattice_volume_mm3": 1111.2725003600003
+    },
+    "validation": {
+      "watertight": true,
+      "single_body": true,
+      "finite": true,
+      "duplicate_faces": 0,
+      "degenerate_faces": 0,
+      "bounds": [
+        [
+          128.33029174804688,
+          87.80611419677734,
+          0.0
+        ],
+        [
+          201.62451171875,
+          184.87908935546875,
+          4.0
+        ]
+      ],
+      "volume_mm3": 3199.7760875444715,
+      "sha256": "d5d635fdb22bfb7e74bc3afb0617193fe18536f4b1c0da47ec433acb63d52acd",
+      "layer_quantum_mm": 0.1,
+      "levels_mm": [
+        1.0,
+        1.1
+      ],
+      "bounds_preserved": true,
+      "valid": true,
+      "missing_rim_mm3": 1.8824847453894716e-05
+    }
+  }
+}

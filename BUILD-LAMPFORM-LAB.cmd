@@ -13,6 +13,8 @@ if errorlevel 1 goto fail
 if errorlevel 1 goto fail
 ".venv\Scripts\python.exe" analysis\build_physical.py
 if errorlevel 1 goto fail
+".venv\Scripts\python.exe" analysis\build_parametric.py
+if errorlevel 1 goto fail
 call npm run build
 if errorlevel 1 goto fail
 call npm test

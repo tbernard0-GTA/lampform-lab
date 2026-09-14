@@ -1,0 +1,16 @@
+{
+  "id": "diamond_rotated",
+  "name": "Diamond · rotated 30°",
+  "topology": "diamond",
+  "pitch_mm": 8.0,
+  "base_width_mm": 1.0,
+  "base_height_mm": 1.0,
+  "orientation_deg": 30.0,
+  "adaptation": "uniform",
+  "response": "reinforce",
+  "width_response": 0.0,
+  "height_response": 0.0,
+  "material_budget_pct": 0.0,
+  "equal_material": false,
+  "target_lattice_volume_mm3": 1010.2080563550008
+}

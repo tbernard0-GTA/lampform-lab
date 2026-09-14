@@ -1,0 +1,16 @@
+{
+  "id": "diamond_equal",
+  "name": "Diamond · Equal volume",
+  "topology": "diamond",
+  "pitch_mm": 8.0,
+  "base_width_mm": 1.3766098022460938,
+  "base_height_mm": 1.0,
+  "orientation_deg": 0.0,
+  "adaptation": "uniform",
+  "response": "reinforce",
+  "width_response": 0.0,
+  "height_response": 0.0,
+  "material_budget_pct": 0.0,
+  "equal_material": true,
+  "target_lattice_volume_mm3": 1396.3457567932421
+}

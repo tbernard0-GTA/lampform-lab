@@ -1,0 +1,16 @@
+{
+  "id": "mechanism",
+  "name": "Mechanism-aware",
+  "topology": "honeycomb",
+  "pitch_mm": 8.0,
+  "base_width_mm": 1.0,
+  "base_height_mm": 1.0,
+  "orientation_deg": 0.0,
+  "adaptation": "mechanism",
+  "response": "mechanism",
+  "width_response": 1.0,
+  "height_response": 1.0,
+  "material_budget_pct": 10.0,
+  "equal_material": false,
+  "target_lattice_volume_mm3": 1111.228861990501
+}

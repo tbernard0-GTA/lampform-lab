@@ -1,4 +1,16 @@
-# LampForm Lab v0.6 — Physical Validation Loop
+# LampForm Lab v0.8 — Parametric Lattice Design Lab
+
+[A história](https://lampform-lab.oieszc.chatgpt.site) · [Design Lab](https://lampform-lab.oieszc.chatgpt.site/design/) · [STLs e mapas V2](https://lampform-lab.oieszc.chatgpt.site/downloads/LAMPFORM_PARAMETRIC_TEST_V2.zip)
+
+A página inicial conta a pesquisa em sete capítulos. O laboratório separa os controles avançados e oferece 48 configurações calculadas: Honeycomb, Triangle e Diamond, comparação por volume equivalente e um experimento de largura versus altura para as duas peças.
+
+Cada seleção corresponde a uma geometria, solver e STL reais. Os controles ajustam explicitamente a seleção ao catálogo disponível; não existe interpolação de métricas ou execução do solver no navegador. A adaptação local está disponível em Honeycomb. Triangle e Diamond têm estados uniformes e de volume equivalente.
+
+O pacote V2 tem A uniforme, B largura variável, C altura variável e D ambas, por peça. Alturas em passos de 0,1 mm; B/C/D usam aproximadamente +10% de volume da malha. São hipóteses para ensaio, sem comprovação física. A altura variável não melhora todos os resultados.
+
+Regenerar: `npm run analysis:parametric` com o ambiente Python ativado; depois `npm run build` e `npm test`. O script BUILD inclui todas as análises. [Método v0.8](docs/V08_IMPLEMENTATION_NOTES.md) · [Resultados completos](docs/V08_CALCULATED_CATALOG.md).
+
+## Referência preservada: v0.6 — Physical Validation Loop
 
 [Aplicação pública](https://lampform-lab.oieszc.chatgpt.site) · [Story Mode](https://lampform-lab.oieszc.chatgpt.site/story.html?scene=01) · [Método e resultados v0.6](docs/LAMPFORM_V06_PHYSICAL_VALIDATION.md) · [Storyboard](docs/VIDEO_STORYBOARD.md)
 
