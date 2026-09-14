@@ -2,7 +2,7 @@
 
 **Do plano à forma: uma demonstração da pesquisa de uma luminária termoformada.**
 
-[Abrir a demonstração pública](https://lampform-lab.spry-owlet-9982.chatgpt.site)
+[Abrir a demonstração pública](https://lampform-lab.oieszc.chatgpt.site)
 
 Uma página em português para contar a história do projeto e explorar seus modelos reais. O público pode consultar o estudo; a manutenção e as alterações do repositório são feitas pelo autor, **Thiago Bernardo**.
 
