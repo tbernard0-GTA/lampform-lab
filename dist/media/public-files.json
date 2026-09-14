@@ -1,0 +1,290 @@
+[
+  {
+    "part": "peca-1",
+    "design": "A_uniform",
+    "file": "downloads/peca-1/peca-1-controle.stl",
+    "sha256": "75a5ce1f1b6fdd216e834c9426be733dd0cce4ca2ea9f5c1adc4925b81f7cdf9"
+  },
+  {
+    "part": "peca-1",
+    "design": "uniform_w8_h8",
+    "file": "downloads/peca-1/peca-1-uniform-w8-h8.stl",
+    "sha256": "4fa4610d740f2631c3f88488a5d22d4ffa3dc6b24bd97c82d4c84564f5965423"
+  },
+  {
+    "part": "peca-1",
+    "design": "uniform_w8_h10",
+    "file": "downloads/peca-1/peca-1-uniform-w8-h10.stl",
+    "sha256": "60659c0f5263546bedb3472f7e53178e65920eb61e72b6ecbe75ac0e8faf5552"
+  },
+  {
+    "part": "peca-1",
+    "design": "uniform_w8_h12",
+    "file": "downloads/peca-1/peca-1-uniform-w8-h12.stl",
+    "sha256": "c73314741f9e081538de98843de243c88f628b2cc5e8ade5cf4dda06a7175211"
+  },
+  {
+    "part": "peca-1",
+    "design": "uniform_w10_h8",
+    "file": "downloads/peca-1/peca-1-uniform-w10-h8.stl",
+    "sha256": "0b6c6fc1761bc7b003055bc885c6450321442d183fe63f9102d52a6768457d83"
+  },
+  {
+    "part": "peca-1",
+    "design": "uniform_w10_h12",
+    "file": "downloads/peca-1/peca-1-uniform-w10-h12.stl",
+    "sha256": "4dde459c0e6f4f4b89260725bd97dc79a71570a38cb9f0f53b05c0d702d6d3cb"
+  },
+  {
+    "part": "peca-1",
+    "design": "uniform_w12_h8",
+    "file": "downloads/peca-1/peca-1-uniform-w12-h8.stl",
+    "sha256": "2e1970e95493ffbd02db86fc6b1b5a38b46d982e6996b0c20b0097a6631d1b4d"
+  },
+  {
+    "part": "peca-1",
+    "design": "uniform_w12_h10",
+    "file": "downloads/peca-1/peca-1-uniform-w12-h10.stl",
+    "sha256": "1f7e96391558709055c14dd8131ce026c6e03f70e70733618adc7d81a47c7bb0"
+  },
+  {
+    "part": "peca-1",
+    "design": "uniform_w12_h12",
+    "file": "downloads/peca-1/peca-1-uniform-w12-h12.stl",
+    "sha256": "55b648722f70dd6fef78b05f1b65dc108d6d9129c28d36321710b166feea8a0e"
+  },
+  {
+    "part": "peca-1",
+    "design": "B_width",
+    "file": "downloads/peca-1/peca-1-largura.stl",
+    "sha256": "a2e6d81d105b1022d6b063ed1dde8a9cbd38cabc555a72d368522d716f3a7adf"
+  },
+  {
+    "part": "peca-1",
+    "design": "C_height",
+    "file": "downloads/peca-1/peca-1-altura.stl",
+    "sha256": "f291ff77467ff558dc9640a900050ced45a3478e46280db1f5b4fe5ed973436d"
+  },
+  {
+    "part": "peca-1",
+    "design": "D_both",
+    "file": "downloads/peca-1/peca-1-combinada.stl",
+    "sha256": "d5d635fdb22bfb7e74bc3afb0617193fe18536f4b1c0da47ec433acb63d52acd"
+  },
+  {
+    "part": "peca-1",
+    "design": "width_half",
+    "file": "downloads/peca-1/peca-1-width-half.stl",
+    "sha256": "a2e6d81d105b1022d6b063ed1dde8a9cbd38cabc555a72d368522d716f3a7adf"
+  },
+  {
+    "part": "peca-1",
+    "design": "height_half",
+    "file": "downloads/peca-1/peca-1-height-half.stl",
+    "sha256": "f291ff77467ff558dc9640a900050ced45a3478e46280db1f5b4fe5ed973436d"
+  },
+  {
+    "part": "peca-1",
+    "design": "both_budget20",
+    "file": "downloads/peca-1/peca-1-both-budget20.stl",
+    "sha256": "8604d2310df141b41756e0b58b200f3d41c28933b62b546c6c930e9f3749a503"
+  },
+  {
+    "part": "peca-1",
+    "design": "comply",
+    "file": "downloads/peca-1/peca-1-comply.stl",
+    "sha256": "a72ce690f9c5241e9629d5346121673cae09d47e00cbd34eb39a8b7b40119ac0"
+  },
+  {
+    "part": "peca-1",
+    "design": "mechanism",
+    "file": "downloads/peca-1/peca-1-mechanism.stl",
+    "sha256": "45e02e8739c72c62fb50b02494adeac802a221efe84a715f34b0d5f65683de73"
+  },
+  {
+    "part": "peca-1",
+    "design": "honey_pitch10",
+    "file": "downloads/peca-1/peca-1-honey-pitch10.stl",
+    "sha256": "7bb66299589eff8ad053b10a268e3c98f354e979e5fef5d76ca1e4d2853879c0"
+  },
+  {
+    "part": "peca-1",
+    "design": "triangle_uniform",
+    "file": "downloads/peca-1/peca-1-triangle-uniform.stl",
+    "sha256": "ee6332c280608ed09a3bab5702bc291940cf49bcc8274f8897128ddad9c4773b"
+  },
+  {
+    "part": "peca-1",
+    "design": "diamond_uniform",
+    "file": "downloads/peca-1/peca-1-diamond-uniform.stl",
+    "sha256": "70a79806fe554bb23c5dcf80eba711a25a141221ebac533482d920f53a78f2a1"
+  },
+  {
+    "part": "peca-1",
+    "design": "honeycomb_equal",
+    "file": "downloads/peca-1/peca-1-hexagonal-volume-equivalente.stl",
+    "sha256": "00f5a1c16bbdec2932a6582ddf558a8c265764c2c44f69fd4eaa6cb0fb43661b"
+  },
+  {
+    "part": "peca-1",
+    "design": "triangle_equal",
+    "file": "downloads/peca-1/peca-1-triangular-volume-equivalente.stl",
+    "sha256": "0b5785818f69af96ae93375649ecbe942730c6d91f01a9ee5c9c0ddaad8b4885"
+  },
+  {
+    "part": "peca-1",
+    "design": "diamond_equal",
+    "file": "downloads/peca-1/peca-1-losango-volume-equivalente.stl",
+    "sha256": "47f62f03193a178b60002fbcd1c451b04ce82dcd02c83f80b8e06d2cca3d3864"
+  },
+  {
+    "part": "peca-1",
+    "design": "diamond_rotated",
+    "file": "downloads/peca-1/peca-1-diamond-rotated.stl",
+    "sha256": "0b559f96436495111e74481e898ba5f2a5b3f490a1d61a51c5ef45c1d6036b26"
+  },
+  {
+    "part": "peca-2",
+    "design": "A_uniform",
+    "file": "downloads/peca-2/peca-2-controle.stl",
+    "sha256": "49c07875e5d32c761c92dd7849f78e41c6a4cee1d78fa4894aa56b410ac5f74e"
+  },
+  {
+    "part": "peca-2",
+    "design": "uniform_w8_h8",
+    "file": "downloads/peca-2/peca-2-uniform-w8-h8.stl",
+    "sha256": "9cf97597bcf922d9d9ea8a37a932ebb5cc139e34fbee1bde93a89a8b84494435"
+  },
+  {
+    "part": "peca-2",
+    "design": "uniform_w8_h10",
+    "file": "downloads/peca-2/peca-2-uniform-w8-h10.stl",
+    "sha256": "87941ca43e711847fd3b211ed2c5eb3c7439a187662965e2e2e810f83389d4bd"
+  },
+  {
+    "part": "peca-2",
+    "design": "uniform_w8_h12",
+    "file": "downloads/peca-2/peca-2-uniform-w8-h12.stl",
+    "sha256": "376562f07367d2eb5a08a400a2ea92986faac67fe689f77bced860d532662353"
+  },
+  {
+    "part": "peca-2",
+    "design": "uniform_w10_h8",
+    "file": "downloads/peca-2/peca-2-uniform-w10-h8.stl",
+    "sha256": "00c534c3f6bcfed123236f297b8e58cdfd5ff617fcea702c272dc2a22a7f6e60"
+  },
+  {
+    "part": "peca-2",
+    "design": "uniform_w10_h12",
+    "file": "downloads/peca-2/peca-2-uniform-w10-h12.stl",
+    "sha256": "0b0bb27d4f0030e776998fdd36168d3d157599b8024864fd1688692eae71a9f2"
+  },
+  {
+    "part": "peca-2",
+    "design": "uniform_w12_h8",
+    "file": "downloads/peca-2/peca-2-uniform-w12-h8.stl",
+    "sha256": "35a1e45ac816621d76bb5c369d3b17c71658fce5af9585705abb2fd332f91432"
+  },
+  {
+    "part": "peca-2",
+    "design": "uniform_w12_h10",
+    "file": "downloads/peca-2/peca-2-uniform-w12-h10.stl",
+    "sha256": "4302ba11aa7fe3e3b2862d1cef1aa8e741ab6a0ce62cf9af06b6f4031c048c91"
+  },
+  {
+    "part": "peca-2",
+    "design": "uniform_w12_h12",
+    "file": "downloads/peca-2/peca-2-uniform-w12-h12.stl",
+    "sha256": "5731db4116ab189b6dcea36d0403dfb85eb2c4c25d4d207018aae6b642a6e97a"
+  },
+  {
+    "part": "peca-2",
+    "design": "B_width",
+    "file": "downloads/peca-2/peca-2-largura.stl",
+    "sha256": "30e61d116e1db81213e515bc0da87bf1f4e6bc91c19a6984ffa435c671c9c6d4"
+  },
+  {
+    "part": "peca-2",
+    "design": "C_height",
+    "file": "downloads/peca-2/peca-2-altura.stl",
+    "sha256": "04cee3e75366a432d660025b1b98cf905cc42e9f2c514feca2b0f5787f8f99ca"
+  },
+  {
+    "part": "peca-2",
+    "design": "D_both",
+    "file": "downloads/peca-2/peca-2-combinada.stl",
+    "sha256": "2baa56075727e140a330aaa47c7848abf29e5adc4630294bde2f5484fb2b0a3a"
+  },
+  {
+    "part": "peca-2",
+    "design": "width_half",
+    "file": "downloads/peca-2/peca-2-width-half.stl",
+    "sha256": "30e61d116e1db81213e515bc0da87bf1f4e6bc91c19a6984ffa435c671c9c6d4"
+  },
+  {
+    "part": "peca-2",
+    "design": "height_half",
+    "file": "downloads/peca-2/peca-2-height-half.stl",
+    "sha256": "04cee3e75366a432d660025b1b98cf905cc42e9f2c514feca2b0f5787f8f99ca"
+  },
+  {
+    "part": "peca-2",
+    "design": "both_budget20",
+    "file": "downloads/peca-2/peca-2-both-budget20.stl",
+    "sha256": "d83beba131188eed0ba0df0b329815701a3dcb69019b2207f44fbf25ec915e9a"
+  },
+  {
+    "part": "peca-2",
+    "design": "comply",
+    "file": "downloads/peca-2/peca-2-comply.stl",
+    "sha256": "debf5462527b17e24e55da5a26c11157e9542995a90206a7166545dadcf0a46e"
+  },
+  {
+    "part": "peca-2",
+    "design": "mechanism",
+    "file": "downloads/peca-2/peca-2-mechanism.stl",
+    "sha256": "989a01b5d0c6d3f2c6250fcc1047719db6e1d0174358ec130a5a73ead97d6600"
+  },
+  {
+    "part": "peca-2",
+    "design": "honey_pitch10",
+    "file": "downloads/peca-2/peca-2-honey-pitch10.stl",
+    "sha256": "e2868412c4e2b4f90d69607e1560c97e7d5d191ecca38f39103d48271ffa20c7"
+  },
+  {
+    "part": "peca-2",
+    "design": "triangle_uniform",
+    "file": "downloads/peca-2/peca-2-triangle-uniform.stl",
+    "sha256": "b6245aba252f7cb82d9a9555d94bc80745bbf9ad106001acf7c2b71519b404da"
+  },
+  {
+    "part": "peca-2",
+    "design": "diamond_uniform",
+    "file": "downloads/peca-2/peca-2-diamond-uniform.stl",
+    "sha256": "26923f8020a46459ef5b6a3c2cd2ea0f07d058b0147557f1627e403772ae2a6d"
+  },
+  {
+    "part": "peca-2",
+    "design": "honeycomb_equal",
+    "file": "downloads/peca-2/peca-2-hexagonal-volume-equivalente.stl",
+    "sha256": "61b73313166b8aa1d4682ef36e3315354b2ba26c36fc19d76259b8db5ed7fc60"
+  },
+  {
+    "part": "peca-2",
+    "design": "triangle_equal",
+    "file": "downloads/peca-2/peca-2-triangular-volume-equivalente.stl",
+    "sha256": "e1d2403e38068173aa0cb317ec9cc603ef91f08389595dafcedce7778842925a"
+  },
+  {
+    "part": "peca-2",
+    "design": "diamond_equal",
+    "file": "downloads/peca-2/peca-2-losango-volume-equivalente.stl",
+    "sha256": "b7dfb82ce436959a4b20935ae1be6ff0f70e34625461199fe6255a70e0fac488"
+  },
+  {
+    "part": "peca-2",
+    "design": "diamond_rotated",
+    "file": "downloads/peca-2/peca-2-diamond-rotated.stl",
+    "sha256": "1d43e1a0b71ad3311f02e5ac50c1a0619f6c979de506bf673ec97a2263489068"
+  }
+]

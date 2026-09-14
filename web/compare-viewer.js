@@ -1,0 +1,12 @@
+import {LabViewer} from './lab-viewer.js';
+export class CompareViewer{
+ constructor(root){this.root=root;this.left=new LabViewer(root.querySelector('.before-view'));this.right=new LabViewer(root.querySelector('.after-view'));this.syncing=false;for(const [a,b]of [[this.left,this.right],[this.right,this.left]])a.controls.addEventListener('change',()=>{if(this.syncing)return;this.syncing=true;b.camera.position.copy(a.camera.position);b.controls.target.copy(a.controls.target);b.controls.update();b.render();this.syncing=false;});this.reveal(50);}
+ setData(reference,current,tool){this.reference=reference;this.current=current;this.left.setData(reference,reference,tool);this.right.setData(current,reference,tool);this.show('geometry');}
+ reveal(value){this.root.querySelector('.after').style.clipPath=`inset(0 0 0 ${value}%)`;this.root.querySelector('.reveal-line').style.left=value+'%';}
+ show(mode){this.mode=mode;const difference=mode==='difference',height=this.current.parameters.height_response>0;
+ for(const v of [this.left,this.right]){v.mode=difference?'difference':'current';v.field=mode==='deformation'?'demand':'neutral';v.exaggeration=mode==='geometry'&&height?3:1;v.formed=false;v.ghost=false;v.update();v.camera.position.fromArray(mode==='geometry'&&height?[125,-145,58]:mode==='deformation'?[0,-.01,205]:[90,-120,100]);if(mode!=='deformation')v.camera.position.multiplyScalar(Math.max(.62,Math.min(1,600/this.root.clientWidth)));v.controls.target.set(0,0,2);v.controls.update();}
+ this.root.querySelector('.after').style.pointerEvents=difference?'auto':'none';this.root.querySelector('.before-view').style.visibility=difference?'hidden':'visible';this.root.querySelector('.after').style.clipPath=difference?'none':`inset(0 0 0 ${this.root.parentElement.querySelector('input').value}%)`;this.root.querySelector('.reveal-line').hidden=difference;this.root.querySelectorAll('.reveal-label').forEach(x=>x.hidden=difference);
+ this.root.querySelector('.empty-difference').hidden=!(difference&&!this.current.added&&!this.current.removed);
+ return difference?'Somente material adicionado (verde) e removido (vermelho).':mode==='deformation'?'Demanda geométrica: verde 0% → vermelho 60%. Mesma escala nas duas vistas.':height?'Relevo ampliado 3× para leitura. O STL mantém a altura real, em passos de 0,1 mm.':'Sólidos reais. Arraste a peça para girar; deslize a divisão para comparar.';
+ }
+}

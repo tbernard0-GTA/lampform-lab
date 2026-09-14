@@ -10,7 +10,8 @@ const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, 'http://localhost');
-    const pathname = ['/design', '/design/'].includes(url.pathname) ? '/design/index.html' : url.pathname === '/' ? '/index.html' : url.pathname;
+    const route=url.pathname.replace(/\/$/,'');
+    const pathname = ['/design','/test','/advanced'].includes(route) ? route+'/index.html' : url.pathname === '/' ? '/index.html' : url.pathname;
     const path = resolve(root, '.' + decodeURIComponent(pathname));
     if (!path.startsWith(resolve(root) + sep)) { res.writeHead(403).end(); return; }
     const data = await readFile(path);

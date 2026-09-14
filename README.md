@@ -1,4 +1,16 @@
-# LampForm Lab v0.8 — Parametric Lattice Design Lab
+# LampForm Lab v0.9 — Entender, escolher, comparar, imprimir
+
+[Story](https://lampform-lab.oieszc.chatgpt.site/) · [Design](https://lampform-lab.oieszc.chatgpt.site/design/) · [Test](https://lampform-lab.oieszc.chatgpt.site/test/) · [Advanced](https://lampform-lab.oieszc.chatgpt.site/advanced/)
+
+Cinco capítulos apresentam a pesquisa. Design guia uma decisão por tela: peça, pergunta, hipótese, comparação visual e interpretação. Os resultados mostram separadamente melhora, piora e custo de material, sem um score que esconda os trade-offs. Advanced reúne os 48 designs e os dados de engenharia.
+
+As peças e arquivos finais agora se chamam **Peça 1** e **Peça 2**. Os pacotes incluem `peca-1-controle.stl`, `peca-1-largura.stl`, `peca-1-altura.stl`, `peca-1-combinada.stl` e `molde-peca-1.stl`, com equivalentes para Peça 2. Os nomes técnicos internos são preservados para manter a rastreabilidade.
+
+Esta versão muda somente a experiência. Solver, catálogo, métricas e STLs da v0.8 permanecem idênticos, verificados por hash. Os arquivos renomeados são cópias exatas. [Decisões de experiência](docs/V09_EXPERIENCE.md).
+
+`npm run build` recompila a interface; `npm test` verifica o conjunto. As imagens e pacotes já estão incluídos. Para recriar apenas esses materiais, use Python com as dependências do projeto e execute `scripts/render-test-thumbnails.py`, `scripts/build-comparison-visuals.py` e `scripts/package-public-tests.py`, nessa ordem. Nenhum deles executa o solver.
+
+## Referência: v0.8 — Parametric Lattice Design Lab
 
 [A história](https://lampform-lab.oieszc.chatgpt.site) · [Design Lab](https://lampform-lab.oieszc.chatgpt.site/design/) · [STLs e mapas V2](https://lampform-lab.oieszc.chatgpt.site/downloads/LAMPFORM_PARAMETRIC_TEST_V2.zip)
 
