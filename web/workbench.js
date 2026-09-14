@@ -35,7 +35,7 @@ function panels(){
   $('risk-table').innerHTML=[['Ligamentos críticos >30%','critical_edges','',0],['Células críticas >30%','critical_cells','',0],['Ligamentos >20%','above_20_pct','%'],['Ligamentos >30%','critical_pct','%'],['P90','p90','%'],['P95','p95','%'],['P99','p99','%'],['Máximo','maximum','%'],['Média dos 10 maiores','top10_mean','%'],['Risk Index','risk_index','',3]].map(([label,k,u,n])=>recordRow(label,a[k],b[k],u,n??1)).join('');
   const parents=[...new Map(data.edges.map(e=>[e.parent,e])).values()];
   $('danger-summary').textContent=`${parents.filter(e=>e.delta<-.1).length} ligamentos melhoraram; ${parents.filter(e=>e.delta>.1).length} pioraram (>0,1 p.p.). Pico: ${signed(b.maximum-a.maximum)} p.p. Tolerância do gate: +5 p.p.`;
-  $('regions').innerHTML=data.top_regions.map(r=>`<tr class="selectable" data-region="${r.id}"><td><button data-region="${r.id}">L${r.id}</button></td><td>${fmt(r.x,2)}</td><td>${fmt(r.y,2)}</td><td>${fmt(r.baseline)}%</td><td>${fmt(r.candidate)}%</td><td class="${r.delta>0?'worse':'better'}">${signed(r.delta)}</td></tr>`).join('');
+  regions();
   $('manufacturing-table').innerHTML=[['Material projetado','material_area_proxy',' mm²'],['Volume proxy','mass_proxy',' mm³'],['Área aberta','open_area','%'],['Largura mínima dos caminhos','minimum_ligament_width',' mm',2],['Geometria plana alterada','geometry_change_pct','%'],['XY feed médio','mean_xy_feed',' mm',2],['XY feed máximo','max_xy_feed',' mm',2]].map(([l,k,u,n])=>recordRow(l,a[k],b[k],u,n??1)).join('')+recordRow('Complexidade · faces',baseline().validation.face_count,r.validation.face_count,'',0);
   const labels={watertight:'Watertight',single_body:'Single body',geometry:'Faces / winding',bounds:'Bounds',min_ligament:'Min ligament',aperture_probe:'Main-cell gap probe'};
   $('geometry-validation').innerHTML=Object.entries(labels).map(([key,label])=>`<div><span>${label}</span><strong class="${g.checks[key]?'better':'worse'}">${g.checks[key]?'PASS':'FAIL'}</strong></div>`).join('');
@@ -49,6 +49,10 @@ function panels(){
   $('caption-left').textContent=`${part==='hab2'?'HAB-2 → Mold':'Sub-Merged → Push'} · 246 ligamentos · referência`;
   $('caption-right').textContent=`${d.name} · 246 ligamentos · câmeras sincronizadas`;
   inspectCell();matrix();pareto('pareto-risk','material_change_pct','risk_index','Material Δ (%)','Risk Index');pareto('pareto-open','open_area','p95','Área aberta (%)','P95 (%)');
+}
+function regions(){
+  const ranked=[...new Map(data.edges.map(e=>[e.parent,e])).values()].sort((a,b)=>$('region-basis').value==='candidate'?b.parent_demand-a.parent_demand:b.baseline_demand-a.baseline_demand).slice(0,10);
+  $('regions').innerHTML=ranked.map(e=>{const a=original.edges.find(v=>v.parent===e.parent).flat;return `<tr class="selectable" data-region="${e.parent}"><td><button data-region="${e.parent}">L${e.parent}</button></td><td>${fmt((a[0]+a[3])/2,2)}</td><td>${fmt((a[1]+a[4])/2,2)}</td><td>${fmt(e.baseline_demand)}%</td><td>${fmt(e.parent_demand)}%</td><td class="${e.delta>0?'worse':'better'}">${signed(e.delta)}</td></tr>`;}).join('');
 }
 function points(coords){return coords.map(p=>`${p[0]},${-p[1]}`).join(' ');}
 function changedCell(c){return Math.abs(c.hole_size-c.original_hole_size)>.01||Math.abs(c.ligament_width-c.original_ligament_width)>.01;}
@@ -88,6 +92,7 @@ function update(){if(!catalog)return;const [lo,hi]=catalog.common_color_ranges[S
   $('color-ramp').style.background=`linear-gradient(90deg,${Array.from({length:9},(_,i)=>color(lo+(hi-lo)*i/8,S.field)).join(',')})`;
   $('forming-controls').hidden=S.view!=='formed';$('representation').disabled=S.view==='formed';
   $('view-note').textContent=S.view==='formed'?`Solver network · etapa real ${S.step*25}% da continuação. Rede aproximada sobre a ferramenta; não é um STL sólido deformado. As cores mostram a demanda FINAL de 100% em todas as etapas.`:S.representation==='stl'?'Actual printable STL: vértices e faces do arquivo que será baixado, com campo associado ao caminho estrutural mais próximo. Arraste para girar os dois modelos.':'Solver network: caminhos materiais usados no cálculo. A geometria sólida exata está em Actual printable STL.';
+  if(S.field==='geometry_change')$('view-note').textContent+=' Cor: proxy = |Δ largura| + deslocamento do ponto médio do segmento em relação ao caminho original; não é uma distância entre superfícies.';
   viewers.forEach(v=>v.update());maps();
 }
 const columns=[['Design','id'],['P95','p95'],['P99','p99'],['Max','maximum'],['Critical %','critical_pct'],['Risk','risk_index'],['Material Δ','material_change_pct'],['Open area','open_area'],['Gate','gate']];
@@ -119,7 +124,8 @@ async function main(){try{
   const r=await fetch('data/results.json');if(!r.ok)throw new Error('Results unavailable');catalog=await r.json();selectedId=catalog.recommendation.candidate_id||catalog.inspection_default_id;
   $('candidate').innerHTML=catalog.designs.map(d=>`<option value="${d.id}">${esc(d.name)}</option>`).join('');
   $('cell').innerHTML=Array.from({length:65},(_,i)=>`<option value="${i}">${i+1}</option>`).join('');
-  const rec=catalog.recommendation;$('print-status').textContent=rec.status;$('print-reason').textContent=rec.reason+` ${catalog.attempts} designs avaliados; limite ${catalog.search_limit}.`;$('print-candidate').dataset.pass=String(!!rec.candidate_id);
+  const rec=catalog.recommendation;$('print-status').textContent=(rec.candidate_name?rec.candidate_name+' · ':'')+rec.status;$('print-reason').textContent=rec.reason+` ${catalog.attempts} designs avaliados; limite ${catalog.search_limit}.`;$('print-candidate').dataset.pass=String(!!rec.candidate_id);
+  $('region-basis').addEventListener('change',regions);
   if(rec.zip)$('print-links').innerHTML=`<a href="${rec.hab2_stl}" download>HAB-2 TEST V1 ↓</a><a href="${rec.submerged_stl}" download>SubMerged TEST V1 ↓</a><a href="${rec.zip}" download>LAMPFORM_PRINT_TEST_V1.zip ↓</a>`;
   $('candidate').addEventListener('change',()=>select($('candidate').value));$('intensity').addEventListener('change',()=>select($('intensity').value));$('family').addEventListener('change',()=>select(catalog.designs.find(d=>d.family===$('family').value).id));
   document.querySelectorAll('[data-part]').forEach(b=>b.addEventListener('click',()=>{part=b.dataset.part;toggle(b,'data-part');refresh();}));

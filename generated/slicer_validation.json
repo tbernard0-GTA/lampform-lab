@@ -1,0 +1,47 @@
+{
+  "slicer": "UltiMaker CuraEngine 5.9.0",
+  "layer_height_mm": 0.2,
+  "physical_print_executed": false,
+  "checks": [
+    {
+      "design": "original",
+      "part": "hab2",
+      "exit_code": 0,
+      "layers": 20,
+      "extrusion_moves": 22877,
+      "warnings": [],
+      "stl": "downloads/original/HAB-2.stl",
+      "sha256": "2331b212661f33b116ba683dc18b64bf02df8d114985da8bea1c4ee2caa464a1"
+    },
+    {
+      "design": "original",
+      "part": "submerged",
+      "exit_code": 0,
+      "layers": 20,
+      "extrusion_moves": 23968,
+      "warnings": [],
+      "stl": "downloads/original/Sub-Merged.stl",
+      "sha256": "5f4a2ff029e569bf3d345b1c1f2ff0a6c65ded83d8466e02a6e34a8074d651d0"
+    },
+    {
+      "design": "reserve_search_3",
+      "part": "hab2",
+      "exit_code": 0,
+      "layers": 20,
+      "extrusion_moves": 26158,
+      "warnings": [],
+      "stl": "downloads/reserve_search_3/HAB-2.stl",
+      "sha256": "ffd84e09b1a41efa540a2f55749b8b1057542b9e1949ec0d2322b97940b341e0"
+    },
+    {
+      "design": "reserve_search_3",
+      "part": "submerged",
+      "exit_code": 0,
+      "layers": 20,
+      "extrusion_moves": 26834,
+      "warnings": [],
+      "stl": "downloads/reserve_search_3/Sub-Merged.stl",
+      "sha256": "b711db490a86d0eab6e187e65087e241ff02c4e787409d0f520191f4aa3af6e3"
+    }
+  ]
+}

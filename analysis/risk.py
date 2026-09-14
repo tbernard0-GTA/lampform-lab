@@ -5,7 +5,7 @@ MAX_WORSENING_PP = 5.
 RISK_WEIGHTS = dict(p95=.30, p99=.25, maximum=.25, critical_fraction=.20)
 
 def classify(value):
-    return 'CRITICAL' if value > 30 else 'HIGH' if value >= 20 else 'MODERATE' if value >= 10 else 'LOW'
+    return 'CRITICAL' if value > THRESHOLDS['critical'] else 'HIGH' if value >= THRESHOLDS['high'] else 'MODERATE' if value >= THRESHOLDS['moderate'] else 'LOW'
 
 def enrich_metrics(result, baseline):
     m = result['metrics']; values = result['parent_demand']

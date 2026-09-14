@@ -20,6 +20,7 @@ from analysis.risk import enrich_metrics, print_gate, THRESHOLDS, MAX_WORSENING_
 from analysis.run_design_sweep import write_json, write_csv, export_data
 
 MANUFACTURING = json.loads((ROOT / 'config/manufacturing.yaml').read_text())  # JSON is valid YAML 1.2
+SOLVER_FINGERPRINT = {name:sha256(ROOT/'analysis'/name) for name in ['solver.py','geometry.py','lattice.py']}
 
 def experiments():
     designs = [dict(id='original', name='Original', family='original', intensity='base', strength=0., band=0., amplitude=0., width=1.)]
@@ -56,13 +57,14 @@ def process(spec, inputs, baselines, hashes):
             old=json.loads(cached.read_text(encoding='utf-8')); old_net=json.loads(cached_net.read_text(encoding='utf-8'))
             same=all(np.array_equal(np.asarray(old_net[k]),np.asarray(design['lattice'][k]))
                      for k in ['nodes','edges','width','rest_length','anchor_nodes','parent'])
-            if same and old['solver']['parameters']==DEFAULTS and old['validation']['sha256']==validation['sha256']:
+            if same and old.get('solver_fingerprint')==SOLVER_FINGERPRINT and old['solver']['parameters']==DEFAULTS and old['validation']['sha256']==validation['sha256']:
                 result=old
                 for key in ['nodes','edges','formed_nodes','edge_strain','displacement','parent_demand']:
                     result[key]=np.asarray(result[key])
                 result['stage_positions']=[np.asarray(stage) for stage in result['stage_positions']]
                 print('  reusing identical geometry + settings solution',flush=True)
         if result is None: result = solve_design(part, tool, design['lattice'])
+        result['solver_fingerprint'] = SOLVER_FINGERPRINT
         result['metrics'].update(manufacturing_metrics(part, design, mesh))
         if baseline is None:
             baseline = result; baselines[part.id] = result

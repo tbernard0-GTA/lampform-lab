@@ -5044,7 +5044,7 @@
     "candidate_id": "reserve_search_3",
     "candidate_name": "Reserve Search 3",
     "status": "RECOMMENDED FOR PRINT TEST",
-    "reason": "Passou os gates nas duas peças. Escolha por menor Risk Index médio entre os aprovados.",
+    "reason": "Passou nos gates das duas peças; menor Risk Index médio entre os aprovados. HAB-2: P95 35.98 → 29.72%; críticos 45 → 10; pico -29.27 p.p. Sub-Merged: P95 55.47 → 50.59%; críticos 98 → 97; pico +0.78 p.p.. Margem pequena em Sub-Merged: redução de apenas um ligamento crítico. Candidato para teste físico; robustez ainda não demonstrada.",
     "hab2_stl": "downloads/HAB-2_TEST_V1_reserve_search_3.stl",
     "submerged_stl": "downloads/SubMerged_TEST_V1_reserve_search_3.stl",
     "zip": "downloads/LAMPFORM_PRINT_TEST_V1.zip"

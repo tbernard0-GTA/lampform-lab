@@ -1,17 +1,16 @@
-# Validação da demonstração
+# Validação da bancada v0.5
 
-Publicação inicial: 14 de setembro de 2026.
+Atualização para validação pelo autor: 14 de setembro de 2026.
 
-- Os 28 arquivos do ZIP são preservados integralmente em `legacy/lampform_lab_v01/`, sem alterações dos scripts ou resultados.
-- `scripts/prepare_data.py` exporta quatro STL binários e os CSV da v0.2 para dados de apresentação. Guarda o SHA-256 de cada STL.
-- `npm test`: quatro testes verificam hashes, contagem de triângulos, índices, coordenadas finitas, correspondência das métricas, comprimento dos ligamentos e P95 calculado a partir da rede.
-- Verificação no navegador: ambas as peças, estados plana/conformada/demanda, ferramenta visível/oculta, extremos do slider, restauração da vista e seleção de ancoragem.
-- Na peça Sub-merged, a seleção 0,05 exibe P95 6,2% e redução de 82,2% em relação ao P95 de referência 34,6%, calculados dos valores completos dos CSV.
-- Layout conferido em desktop e em viewport de 390 × 844, sem rolagem horizontal.
-- A página é servida localmente por HTTP e o JavaScript compilado passou pela verificação de sintaxe.
+- Originais e ferramentas preservados em `legacy/`. Baselines v0.1/v0.2 reproduzidos, com diferenças inferiores a 0,02 ponto percentual (`generated/baseline_reproduction.json`).
+- Treze designs calculados com o mesmo solver, incluindo Original; 26 conjuntos de resultados, cinco etapas reais de continuação e 24 STL candidatos novos.
+- Testes verificam correspondência entre campos, métricas, geometria e arquivos; gates das duas peças; hashes dos downloads; sólidos fechados com um corpo; preservação do aro; largura dos caminhos; conteúdo dos ZIP. Uma ablação confirma que a largura afeta a solução.
+- CuraEngine 5.9.0 processou Original e Reserve Search 3 nas duas peças, com 20 camadas e sem avisos registrados. Resultados e hashes estão em `generated/slicer_validation.json`. Isso não substitui inspeção visual das camadas nem validação física.
+- A bancada v0.5 foi vista no navegador em desktop: geometrias STL e rede conformada carregaram. A inspeção visual completa dos controles e do layout móvel permanece pendente.
+- A inspeção final dos STL Reserve Search 3 na interface do Cura foi interrompida. A versão atual foi publicada a pedido do autor para sua validação, antes dessa conclusão.
 
-## Limites
+## Limites da recomendação
 
-Os solvers legados não foram reexecutados nesta fase. Os testes validam o transporte e a coerência dos resultados fornecidos, não a validade física do modelo. Não se afirma convergência reproduzida nesta publicação, calibração de material, fabricação de candidatos novos ou validação de impressão.
+Reserve Search 3 passa nos critérios relativos das duas peças. No Sub-Merged, os ligamentos críticos caem apenas de 98 para 97 e o pico aumenta 0,78 ponto percentual: a margem é pequena. A recomendação é de teste físico, sem demonstração de robustez.
 
-A geometria da peça plana vem do STL. A geometria conformada é uma rede equivalente de eixos dos ligamentos, desenhados com espessura apenas para legibilidade. Não representa uma nova peça sólida pronta para impressão. O movimento intermediário é interpolado e não recalculado pelo solver.
+Não houve impressão física, calibração de polímero, análise térmica ou validação de ruptura. Os estados conformados mostram a rede equivalente do solver, não um novo sólido deformado. As cores de demanda usam o resultado final em todas as etapas.

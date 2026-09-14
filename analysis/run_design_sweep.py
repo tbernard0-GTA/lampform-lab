@@ -239,4 +239,5 @@ def main():
     print(f'Recommended candidate: {candidate["name"]}\n{reason}\nGenerated: dist/data/designs.json and dist/downloads/...')
 
 
-if __name__ == '__main__': main()
+if __name__ == '__main__':
+    raise SystemExit('v0.4 command retired to protect v0.5 exports. Use python analysis/build_design_space.py. Shared export helpers remain importable.')

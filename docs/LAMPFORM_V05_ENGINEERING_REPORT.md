@@ -90,7 +90,7 @@ Defaults in `config/manufacturing.yaml`: 0.4 mm line, 0.8 mm structural path, 0.
 
 RECOMMENDED FOR PRINT TEST
 
-Passou os gates nas duas peças. Escolha por menor Risk Index médio entre os aprovados.
+Passou nos gates das duas peças; menor Risk Index médio entre os aprovados. HAB-2: P95 35.98 → 29.72%; críticos 45 → 10; pico -29.27 p.p. Sub-Merged: P95 55.47 → 50.59%; críticos 98 → 97; pico +0.78 p.p.. Margem pequena em Sub-Merged: redução de apenas um ligamento crítico. Candidato para teste físico; robustez ainda não demonstrada.
 
 RECOMMENDED PHYSICAL TEST
 Original vs Reserve Search 3

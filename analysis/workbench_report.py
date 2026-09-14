@@ -26,6 +26,16 @@ def finish_outputs(catalog):
     items=catalog['designs'];original=items[0]
     winner=next((d for d in items if d['id']==catalog['recommendation']['candidate_id']),None)
     focus=winner or min(items[1:],key=lambda d:d['combined_risk'])
+    if winner:
+        changes=[]
+        for p,label in [('hab2','HAB-2'),('submerged','Sub-Merged')]:
+            a=original[p]['metrics'];b=winner[p]['metrics']
+            changes.append(f'{label}: P95 {a["p95"]:.2f} → {b["p95"]:.2f}%; críticos {a["critical_edges"]} → {b["critical_edges"]}; pico {b["maximum"]-a["maximum"]:+.2f} p.p.')
+        narrow=[label for p,label in [('hab2','HAB-2'),('submerged','Sub-Merged')]
+                if original[p]['metrics']['critical_edges']-winner[p]['metrics']['critical_edges']<=1]
+        catalog['recommendation']['reason']='Passou nos gates das duas peças; menor Risk Index médio entre os aprovados. '+' '.join(changes)+'. '
+        if narrow:catalog['recommendation']['reason']+='Margem pequena em '+', '.join(narrow)+': redução de apenas um ligamento crítico. '
+        catalog['recommendation']['reason']+='Candidato para teste físico; robustez ainda não demonstrada.'
     catalog['inspection_default_id']=focus['id']
     for part in ['hab2','submerged']:
         plot_pair(original,focus,part,folder/f'risk_map_{part}.png')
