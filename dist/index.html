@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Da impressão plana à forma: explore a pesquisa de uma luminária termoformada, seus modelos 3D e a influência da borda na deformação." />
+  <meta name="theme-color" content="#f3f4ef" />
+  <meta property="og:title" content="LampForm Lab — do plano à forma" />
+  <meta property="og:description" content="Um estudo de luminária, geometria e termoformagem. Explore os modelos reais e os resultados da pesquisa." />
+  <title>LampForm Lab — do plano à forma</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23272b27'/%3E%3Cpath d='M8 8v16h16M13 8v10h11' fill='none' stroke='%23d9ef86' stroke-width='3'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#explorar">Ir para a demonstração</a>
+  <header class="header">
+    <a class="wordmark" href="#inicio" aria-label="LampForm Lab, início">LF<span>↗</span></a>
+    <nav aria-label="Navegação principal"><a href="#explorar">Explorar</a><a href="#historia">A história</a><a href="https://github.com/tbernard0-GTA/lampform-lab" target="_blank" rel="noopener">GitHub ↗</a></nav>
+    <span class="edition">ESTUDO ABERTO / V0.2</span>
+  </header>
+
+  <main id="inicio">
+    <section class="intro" aria-labelledby="title">
+      <div class="eyebrow">DESIGN EXPERIMENTAL · IMPRESSÃO 3D · TERMOFORMAGEM</div>
+      <h1 id="title">LAMPFORM <span>LAB</span></h1>
+      <div class="intro-line"><p>Uma luminária começa plana.<br>O desafio é dar forma à sua estrutura.</p><a href="#explorar" class="text-link">Explore o experimento <span>↓</span></a></div>
+    </section>
+
+    <section class="experiment" id="explorar" aria-labelledby="experiment-title">
+      <div class="experiment-copy">
+        <span class="eyebrow">01 / DO PLANO À FORMA</span>
+        <h2 id="experiment-title">A mesma malha.<br>Outra dimensão.</h2>
+        <p>Duas peças vazadas são impressas planas e conformadas sobre ferramentas. Explore a geometria original e a rede usada para estudar esse movimento.</p>
+        <label class="control-label" for="piece">PEÇA EM EXIBIÇÃO</label>
+        <select id="piece"><option value="hab2_mold">HAB-2 → Mold</option><option value="submerged_push">Sub-merged body → Push</option></select>
+        <div class="states" role="group" aria-label="Visualização"><button data-view="flat" aria-pressed="true">Plana</button><button data-view="formed" aria-pressed="false">Conformada</button><button data-view="demand" aria-pressed="false">Demanda</button></div>
+        <p class="state-description" id="state-description" aria-live="polite">O STL original da peça, antes da conformação.</p>
+        <div id="forming-control" hidden><label for="progress">Etapa ilustrativa <output id="progress-value">100%</output></label><input type="range" id="progress" min="0" max="100" value="100" step="1" /><p class="fine">Interpolação da rede entre o plano e o resultado calculado; as etapas intermediárias não são simulações.</p></div>
+        <label class="check"><input type="checkbox" id="show-tool" /> Mostrar ferramenta de conformação</label>
+        <div class="geometry-info" id="geometry-info">Carregando a geometria…</div>
+      </div>
+      <div class="viewer-wrap">
+        <div class="viewer-top"><span id="model-label">HAB-2 / ORIGINAL</span><button id="reset-camera" aria-label="Restaurar vista 3D">Restaurar vista ↺</button></div>
+        <div id="viewer" role="img" aria-label="Visualização 3D interativa. Arraste para girar e use a roda para aproximar."><p class="loading" id="loading" role="status">Carregando os modelos reais…</p></div>
+        <div class="legend" id="legend" hidden><span>Demanda nos ligamentos</span><div class="color-ramp"></div><div class="legend-scale"><span>0%</span><span>30%</span><span>60%+</span></div></div>
+        <div class="viewer-bottom"><span>ARRASTE PARA GIRAR · ROLE PARA APROXIMAR</span><span>GEOMETRIA REAL / mm</span></div>
+      </div>
+    </section>
+
+    <section class="results" aria-labelledby="results-title">
+      <div><span class="eyebrow">RESULTADO DE REFERÊNCIA / V0.2</span><h2 id="results-title">Ler a demanda.<br>Entender o limite.</h2><p>Indicadores da rede conformada, com ancoragem da borda em 2,0.</p></div>
+      <dl class="metrics" aria-live="polite"><div><dt>Demanda média</dt><dd id="mean">—</dd></div><div><dt>P95 da demanda <abbr title="95% dos ligamentos têm demanda igual ou inferior a este valor.">?</abbr></dt><dd id="p95">—</dd></div><div><dt>Demanda máxima</dt><dd id="maximum">—</dd></div></dl>
+      <p class="model-note">Os valores são estimativas geométricas e estruturais da demanda de deformação. Ainda não representam a deformação real calibrada do polímero aquecido.</p>
+    </section>
+
+    <section id="historia" class="story" aria-labelledby="story-title">
+      <div class="story-heading"><span class="eyebrow">02 / A HISTÓRIA DO EXPERIMENTO</span><h2 id="story-title">Do desenho ao<br>comportamento.</h2><p>O ponto de partida é uma luminária. A pesquisa investiga como sua malha pode sair do plano e acompanhar uma superfície curva.</p></div>
+      <ol class="timeline"><li><span>01</span><div><h3>Começar pela peça real</h3><p>Quatro arquivos STL definem as duas peças e suas ferramentas. Cada peça tem 65 aberturas hexagonais.</p></div><span class="tag">GEOMETRIA</span></li><li><span>02</span><div><h3>Permitir que a malha se mova</h3><p>A primeira versão compara a projeção direta com uma rede que pode se deslocar no plano. Esse movimento reduz a incompatibilidade geométrica.</p></div><span class="tag">V0.1</span></li><li><span>03</span><div><h3>Olhar para os ligamentos</h3><p>A v0.2 aproxima os eixos das paredes em uma rede de 173 nós e 234 ligamentos. A restrição imposta pelo aro passa a ser uma pergunta central.</p></div><span class="tag">V0.2</span></li><li><span>04</span><div><h3>Levar a hipótese à bancada</h3><p>O próximo passo é criar uma transição mais flexível junto ao aro, imprimir, termoformar e medir. Só o experimento poderá validar a previsão.</p></div><span class="tag">PRÓXIMO PASSO</span></li></ol>
+    </section>
+
+    <section class="boundary" aria-labelledby="boundary-title">
+      <div class="boundary-copy"><span class="eyebrow">03 / A DESCOBERTA</span><h2 id="boundary-title">A borda também<br>desenha a forma.</h2><p>No modelo, permitir que a periferia alimente material para a região conformada muda a demanda. A resposta não depende apenas de engrossar os ligamentos.</p><label for="anchor">Explore a ancoragem da borda</label><select id="anchor"><option value="5">5,0 — mais restrita</option><option value="2" selected>2,0 — referência</option><option value="1">1,0</option><option value="0.5">0,5</option><option value="0.2">0,2</option><option value="0.05">0,05 — menos restrita</option></select><p class="fine">Resultados pré-calculados da v0.2. O parâmetro de ancoragem não é uma rigidez física calibrada.</p></div>
+      <div class="comparison" aria-live="polite"><div class="chart-caption"><span>P95 DA DEMANDA</span><span id="comparison-piece">HAB-2 → Mold</span></div><div class="bar-row"><span>Referência · 2,0</span><strong id="base-bar-value">—</strong><div class="bar-track"><div id="base-bar" class="bar reference"></div></div></div><div class="bar-row"><span id="selected-bar-label">Selecionada · 2,0</span><strong id="selected-bar-value">—</strong><div class="bar-track"><div id="selected-bar" class="bar"></div></div></div><p id="comparison-insight" class="comparison-insight">Carregando os resultados…</p><p class="fine">Comparação para a peça selecionada acima. Alterar a ancoragem consulta o estudo de sensibilidade; não altera a rede 3D de referência.</p></div>
+    </section>
+
+    <section class="closing"><span class="eyebrow">PESQUISA EM ANDAMENTO</span><h2>Uma hipótese visível.<br>Um processo aberto.</h2><p>Explore os arquivos originais, os scripts e os resultados que sustentam este estudo.</p><a class="button" href="https://github.com/tbernard0-GTA/lampform-lab" target="_blank" rel="noopener">Ver o projeto no GitHub <span>↗</span></a><a class="download" href="data/summary_v02.json" download="lampform-resultados-v02.json">Baixar os resultados de referência ↓</a></section>
+  </main>
+  <footer><a class="wordmark" href="#inicio">LF<span>↗</span></a><span>LampForm Lab · Thiago Bernardo</span><span>Consulta pública · Manutenção pelo autor</span></footer>
+  <noscript><p class="noscript">Ative JavaScript para explorar os modelos. A história permanece disponível nesta página e os arquivos estão no GitHub.</p></noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

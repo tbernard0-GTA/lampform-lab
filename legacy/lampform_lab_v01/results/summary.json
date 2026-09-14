@@ -1,0 +1,53 @@
+{
+  "config": {
+    "section_z_mm": 0.5,
+    "cell_area_range_mm2": [
+      35.0,
+      50.0
+    ],
+    "neighbor_max_distance_mm": 8.5,
+    "boundary_anchor_weight": 2.5,
+    "interior_anchor_weight": 0.01,
+    "current_hex_side_mm": 4.0,
+    "current_pitch_mm": 8.0,
+    "compensation_fraction": 0.65,
+    "design_lambda_cap": 1.22,
+    "min_hex_side_mm": 2.8
+  },
+  "pairs": [
+    {
+      "pair": "HAB-2 \u2192 Mold",
+      "cells": 65,
+      "neighbor_edges": 164,
+      "solver_success": true,
+      "direct_mean_effective_stretch_pct": 18.001042515786093,
+      "direct_p95_effective_stretch_pct": 60.879295648560294,
+      "direct_max_effective_stretch_pct": 152.66881518480292,
+      "relaxed_mean_effective_stretch_pct": 7.493225908573309,
+      "relaxed_p95_effective_stretch_pct": 15.361402946173296,
+      "relaxed_max_effective_stretch_pct": 21.180273749084442,
+      "mean_xy_feed_mm": 1.1860416400610723,
+      "max_xy_feed_mm": 2.4731988231754656,
+      "candidate_hex_side_min_mm": 3.3641212889717185,
+      "candidate_hex_side_mean_mm": 3.6124619614982976,
+      "candidate_ligament_gap_max_mm": 2.173171004676883
+    },
+    {
+      "pair": "Sub-merged body \u2192 Push",
+      "cells": 65,
+      "neighbor_edges": 164,
+      "solver_success": true,
+      "direct_mean_effective_stretch_pct": 19.84854667568814,
+      "direct_p95_effective_stretch_pct": 68.32175434497523,
+      "direct_max_effective_stretch_pct": 165.54833822697213,
+      "relaxed_mean_effective_stretch_pct": 7.955853695277315,
+      "relaxed_p95_effective_stretch_pct": 15.067173533453637,
+      "relaxed_max_effective_stretch_pct": 23.660459529254506,
+      "mean_xy_feed_mm": 1.4675639587443041,
+      "max_xy_feed_mm": 3.323271560322935,
+      "candidate_hex_side_min_mm": 3.339511292047068,
+      "candidate_hex_side_mean_mm": 3.6008139084986888,
+      "candidate_ligament_gap_max_mm": 2.2157967697244914
+    }
+  ]
+}

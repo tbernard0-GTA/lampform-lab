@@ -1,0 +1,4 @@
+* text=auto eol=lf
+legacy/** -text
+*.stl -text
+*.png -text

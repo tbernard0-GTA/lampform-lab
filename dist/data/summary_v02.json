@@ -1,0 +1,44 @@
+[
+  {
+    "pair": "HAB-2 \u2192 Mold",
+    "cells": 65,
+    "ligament_nodes": 173,
+    "ligaments": 234,
+    "current_nominal_gap_mm": 1.0717967697244912,
+    "baseline_boundary_anchor": 2.0,
+    "solver_success": true,
+    "direct": {
+      "mean_strain_pct": 29.362521722166555,
+      "p95_strain_pct": 111.44472836638646,
+      "max_strain_pct": 233.8048396146458
+    },
+    "relaxed": {
+      "mean_strain_pct": 20.25516562043488,
+      "p95_strain_pct": 32.84543263236361,
+      "max_strain_pct": 53.234793296725115
+    },
+    "mean_xy_feed_mm": 1.8015698788671421,
+    "max_xy_feed_mm": 5.511838569141933
+  },
+  {
+    "pair": "Sub-merged body \u2192 Push",
+    "cells": 65,
+    "ligament_nodes": 173,
+    "ligaments": 234,
+    "current_nominal_gap_mm": 1.0717967697244912,
+    "baseline_boundary_anchor": 2.0,
+    "solver_success": true,
+    "direct": {
+      "mean_strain_pct": 32.70901573799539,
+      "p95_strain_pct": 160.0024574397843,
+      "max_strain_pct": 246.87877564847577
+    },
+    "relaxed": {
+      "mean_strain_pct": 20.772473368364473,
+      "p95_strain_pct": 34.62521747604559,
+      "max_strain_pct": 51.74772676925903
+    },
+    "mean_xy_feed_mm": 1.8647220812793506,
+    "max_xy_feed_mm": 5.89920371243444
+  }
+]
